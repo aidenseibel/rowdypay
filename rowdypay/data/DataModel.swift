@@ -8,6 +8,9 @@
 import Foundation
 
 class DataModel {
+    static func getUser(id: Int) -> User{
+        return User()
+    }
     static func getHelloWorld() {
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/hello_world") else {
             print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/hello_world")

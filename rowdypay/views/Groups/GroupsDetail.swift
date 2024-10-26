@@ -12,7 +12,11 @@ struct GroupsDetail: View {
     var body: some View {
         VStack{
             Text(thisgroup.name)
-            
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+            Spacer()
             HStack {
                 // Show first 4 users
                 ForEach(Array(thisgroup.users.prefix(4)), id: \.self) { userID in
@@ -40,12 +44,13 @@ struct GroupsDetail: View {
                                 .font(.caption)
                                 .foregroundColor(.gray)
                         }
-                        Text("More")
+                        Text("\(thisgroup.users.count - 4) More")
                             .font(.caption)
                     }
                 }
             }
             Text("You Owe")
+            Text("$20")
             
         }
     }
