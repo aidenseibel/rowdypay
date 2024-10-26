@@ -33,13 +33,14 @@ class Payment: Identifiable, Hashable, Codable {
         case date = "date_made"
     }
 
+    // for decoding dates
     enum DateCodingKeys: String, CodingKey {
         case day
         case month
         case year
     }
 
-    // randomize
+    // randomized
     init() {
         self.id = Int.random(in: 1...10000)
         self.user = 1
@@ -75,8 +76,3 @@ class Payment: Identifiable, Hashable, Codable {
         self.date = calendar.date(from: dateComponents) ?? Date() // Fallback to current date if decoding fails
     }
 }
-
-
-var sample_payments = [
-    Payment(), Payment(), Payment()
-]

@@ -1,5 +1,5 @@
 //
-//  BudgetTab.swift
+//  GroupsTab.swift
 //  rowdypay
 //
 //  Created by Aiden Seibel on 10/26/24.

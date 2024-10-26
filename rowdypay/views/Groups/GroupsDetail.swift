@@ -9,6 +9,11 @@ import SwiftUI
 
 struct GroupsDetail: View {
     let thisgroup: Group
+    
+    @State private var users: [User] = []
+    @State private var isLoading: Bool = true
+    @State private var errorMessage: String? // Optional error message
+
     var body: some View {
         VStack{
             Text(thisgroup.name)
@@ -18,18 +23,30 @@ struct GroupsDetail: View {
                 .padding()
             Spacer()
             HStack {
-                // Show first 4 users
-                ForEach(Array(thisgroup.users.prefix(4)), id: \.self) { userID in
-                    let user = DataModel.getUser(id: userID)
-                    VStack {
-                        Image(user.image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 40, height: 40)
-                            .background(Color.gray.opacity(0.2))
-                            .clipShape(Circle())
-                        Text(user.username)
-                            .font(.caption)
+                if isLoading {
+                    // Loading indicator
+                    ProgressView("Loading users...")
+                } else if let errorMessage = errorMessage {
+                    // Show error message
+                    Text("Error: \(errorMessage)")
+                        .foregroundColor(.red)
+                } else if users.isEmpty {
+                    // No users found
+                    Text("No users in this group.")
+                        .foregroundStyle(.gray)
+                } else {
+                    // Show first 4 users
+                    ForEach(users, id: \.self) { user in
+                        VStack {
+                            Image(user.image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 40, height: 40)
+                                .background(Color.gray.opacity(0.2))
+                                .clipShape(Circle())
+                            Text(user.username)
+                                .font(.caption)
+                        }
                     }
                 }
                 
@@ -48,12 +65,30 @@ struct GroupsDetail: View {
                             .font(.caption)
                     }
                 }
+
             }
+            Spacer()
             Text("You Owe")
             Text("$20")
             
         }
     }
+    
+    private func fetchUsers() {
+        let groupID = thisgroup.id
+        
+        DataModel.getUsersFromGroup(id: groupID){ users in
+            DispatchQueue.main.async {
+                if users.isEmpty {
+                    self.users = []
+                    self.errorMessage = nil
+                } else {
+                    self.users = users
+                    self.errorMessage = nil
+                }
+                self.isLoading = false
+            }
+        }
+    }
 }
-
 
