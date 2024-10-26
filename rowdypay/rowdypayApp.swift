@@ -31,7 +31,7 @@ struct rowdypayApp: App {
             }
             .environmentObject(viewModel)
             .onAppear {
-                DataModel.getHelloWorld()
+                DataModel.getPaymentsFromUser(id: 1)
             }
         }
     }
