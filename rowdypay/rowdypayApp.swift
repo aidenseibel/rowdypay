@@ -11,7 +11,22 @@ import SwiftUI
 struct rowdypayApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView() {
+                BudgetTab()
+                    .tabItem {
+                        Label("Groups", systemImage: "square.stack.fill")
+                    }
+
+                AddTab()
+                    .tabItem {
+                        Label("Add", systemImage: "plus.circle.fill")
+                    }
+
+                ProfileTab()
+                    .tabItem {
+                        Label("Profile", systemImage: "person.circle.fill")
+                    }
+            }
         }
     }
 }

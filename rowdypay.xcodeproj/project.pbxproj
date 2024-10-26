@@ -8,17 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07222CCD5F9100EE3B66 /* rowdypayApp.swift */; };
-		17CD07252CCD5F9100EE3B66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07242CCD5F9100EE3B66 /* ContentView.swift */; };
 		17CD07272CCD5F9200EE3B66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17CD07262CCD5F9200EE3B66 /* Assets.xcassets */; };
 		17CD072A2CCD5F9200EE3B66 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17CD07292CCD5F9200EE3B66 /* Preview Assets.xcassets */; };
+		17CD07332CCD5FD300EE3B66 /* ProfileTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07322CCD5FD300EE3B66 /* ProfileTab.swift */; };
+		17CD07362CCD5FE500EE3B66 /* AddTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07352CCD5FE500EE3B66 /* AddTab.swift */; };
+		17CD07382CCD5FED00EE3B66 /* BudgetTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07372CCD5FED00EE3B66 /* BudgetTab.swift */; };
+		17CD073A2CCD600200EE3B66 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07392CCD600200EE3B66 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		17CD071F2CCD5F9100EE3B66 /* rowdypay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rowdypay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17CD07222CCD5F9100EE3B66 /* rowdypayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rowdypayApp.swift; sourceTree = "<group>"; };
-		17CD07242CCD5F9100EE3B66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		17CD07262CCD5F9200EE3B66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17CD07292CCD5F9200EE3B66 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		17CD07322CCD5FD300EE3B66 /* ProfileTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTab.swift; sourceTree = "<group>"; };
+		17CD07352CCD5FE500EE3B66 /* AddTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTab.swift; sourceTree = "<group>"; };
+		17CD07372CCD5FED00EE3B66 /* BudgetTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetTab.swift; sourceTree = "<group>"; };
+		17CD07392CCD600200EE3B66 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +58,8 @@
 			isa = PBXGroup;
 			children = (
 				17CD07222CCD5F9100EE3B66 /* rowdypayApp.swift */,
-				17CD07242CCD5F9100EE3B66 /* ContentView.swift */,
+				17CD07312CCD5FC300EE3B66 /* data */,
+				17CD07302CCD5FBC00EE3B66 /* views */,
 				17CD07262CCD5F9200EE3B66 /* Assets.xcassets */,
 				17CD07282CCD5F9200EE3B66 /* Preview Content */,
 			);
@@ -65,6 +72,24 @@
 				17CD07292CCD5F9200EE3B66 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		17CD07302CCD5FBC00EE3B66 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				17CD07322CCD5FD300EE3B66 /* ProfileTab.swift */,
+				17CD07352CCD5FE500EE3B66 /* AddTab.swift */,
+				17CD07372CCD5FED00EE3B66 /* BudgetTab.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		17CD07312CCD5FC300EE3B66 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				17CD07392CCD600200EE3B66 /* ViewModel.swift */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +162,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17CD07252CCD5F9100EE3B66 /* ContentView.swift in Sources */,
+				17CD073A2CCD600200EE3B66 /* ViewModel.swift in Sources */,
+				17CD07382CCD5FED00EE3B66 /* BudgetTab.swift in Sources */,
 				17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */,
+				17CD07332CCD5FD300EE3B66 /* ProfileTab.swift in Sources */,
+				17CD07362CCD5FE500EE3B66 /* AddTab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
