@@ -27,6 +27,9 @@ struct rowdypayApp: App {
                         Label("Profile", systemImage: "person.circle.fill")
                     }
             }
+            .onAppear {
+                DataModel.getHelloWorld()
+            }
         }
     }
 }
