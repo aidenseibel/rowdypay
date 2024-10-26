@@ -19,6 +19,8 @@
 		17CD07402CCD628F00EE3B66 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD073F2CCD628F00EE3B66 /* Payment.swift */; };
 		17CD07422CCD644D00EE3B66 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07412CCD644D00EE3B66 /* DataModel.swift */; };
 		17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */; };
+		17CD074C2CCD785C00EE3B66 /* PaymentSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD074B2CCD785C00EE3B66 /* PaymentSubView.swift */; };
+		17CD074E2CCD7C3B00EE3B66 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD074D2CCD7C3B00EE3B66 /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		17CD07412CCD644D00EE3B66 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		17CD07482CCD699D00EE3B66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSubView.swift; sourceTree = "<group>"; };
+		17CD074B2CCD785C00EE3B66 /* PaymentSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSubView.swift; sourceTree = "<group>"; };
+		17CD074D2CCD7C3B00EE3B66 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 				17CD073B2CCD628200EE3B66 /* User.swift */,
 				17CD073F2CCD628F00EE3B66 /* Payment.swift */,
 				17CD073D2CCD628800EE3B66 /* Group.swift */,
+				17CD074D2CCD7C3B00EE3B66 /* Util.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */,
+				17CD074B2CCD785C00EE3B66 /* PaymentSubView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -211,12 +217,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17CD074C2CCD785C00EE3B66 /* PaymentSubView.swift in Sources */,
 				17CD073E2CCD628800EE3B66 /* Group.swift in Sources */,
 				17CD073A2CCD600200EE3B66 /* ViewModel.swift in Sources */,
 				17CD07382CCD5FED00EE3B66 /* GroupsTab.swift in Sources */,
 				17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */,
 				17CD073C2CCD628200EE3B66 /* User.swift in Sources */,
 				17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */,
+				17CD074E2CCD7C3B00EE3B66 /* Util.swift in Sources */,
 				17CD07332CCD5FD300EE3B66 /* ProfileTab.swift in Sources */,
 				17CD07402CCD628F00EE3B66 /* Payment.swift in Sources */,
 				17CD07362CCD5FE500EE3B66 /* AddTab.swift in Sources */,

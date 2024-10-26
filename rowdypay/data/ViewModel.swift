@@ -8,6 +8,9 @@
 import Foundation
 
 public class ViewModel: ObservableObject {
+    @Published var localUser: User
     
-    
+    init() {
+        localUser = User()
+    }
 }
