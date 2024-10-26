@@ -7,19 +7,28 @@
 
 import Foundation
 
-class Group: Identifiable, Codable {
-    var id: UUID = UUID()
+class Group: Identifiable, Codable, Hashable {
+    static func == (lhs: Group, rhs: Group) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }    
+    
+    var id: Int
     var name: String
     var image: String
-    var users: [UUID]
+    var users: [Int]
     
     init() {
+        self.id = 1
         self.name = "RowdyHacks Group"
         self.image = "sample_group_image"
         self.users = []
     }
     
-    init(id: UUID = UUID(), name: String, image: String, users: [UUID]) {
+    init(id: Int, name: String, image: String, users: [Int]) {
         self.id = id
         self.name = name
         self.image = image
@@ -27,3 +36,4 @@ class Group: Identifiable, Codable {
     }
 }
 
+var sample_groups = [Group(), Group(), Group()]
