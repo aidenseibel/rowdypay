@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct rowdypayApp: App {
+    @StateObject var viewModel = ViewModel()
+
     var body: some Scene {
         WindowGroup {
             TabView() {
@@ -27,6 +29,7 @@ struct rowdypayApp: App {
                         Label("Profile", systemImage: "person.circle.fill")
                     }
             }
+            .environmentObject(viewModel)
             .onAppear {
                 DataModel.getHelloWorld()
             }

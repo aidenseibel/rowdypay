@@ -12,4 +12,10 @@ class Group: Identifiable, Codable {
     var name: String
     var image: String
     var users: [UUID]
+    
+    init() {
+        self.name = "RowdyHacks Group"
+        self.image = "img"
+        self.users = []
+    }
 }
