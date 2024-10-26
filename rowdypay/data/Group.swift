@@ -21,6 +21,15 @@ class Group: Identifiable, Codable, Hashable {
     var image: String
     var users: [Int]
     
+    // for json decoding
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+        case image = "image"
+        case users = "users"
+    }
+    
+    // randomized
     init() {
         self.id = 1
         self.name = "RowdyHacks Group"
@@ -34,6 +43,13 @@ class Group: Identifiable, Codable, Hashable {
         self.image = image
         self.users = users
     }
+    
+    // from json
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.image = try container.decode(String.self, forKey: .image)
+        self.users = try container.decode([Int].self, forKey: .users)
+    }
 }
-
-var sample_groups = [Group(), Group(), Group()]
