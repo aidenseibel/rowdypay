@@ -21,6 +21,7 @@
 		17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */; };
 		17CD074C2CCD785C00EE3B66 /* PaymentSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD074B2CCD785C00EE3B66 /* PaymentSubView.swift */; };
 		17CD074E2CCD7C3B00EE3B66 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD074D2CCD7C3B00EE3B66 /* Util.swift */; };
+		ADCA4D582CCD8987008D4CEA /* GroupsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSubView.swift; sourceTree = "<group>"; };
 		17CD074B2CCD785C00EE3B66 /* PaymentSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSubView.swift; sourceTree = "<group>"; };
 		17CD074D2CCD7C3B00EE3B66 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				17CD07372CCD5FED00EE3B66 /* GroupsTab.swift */,
+				ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				17CD073C2CCD628200EE3B66 /* User.swift in Sources */,
 				17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */,
 				17CD074E2CCD7C3B00EE3B66 /* Util.swift in Sources */,
+				ADCA4D582CCD8987008D4CEA /* GroupsDetail.swift in Sources */,
 				17CD07332CCD5FD300EE3B66 /* ProfileTab.swift in Sources */,
 				17CD07402CCD628F00EE3B66 /* Payment.swift in Sources */,
 				17CD07362CCD5FE500EE3B66 /* AddTab.swift in Sources */,

@@ -41,11 +41,16 @@ class DataModel {
         .resume()
     }
     
+    
     static func getGroup(id: UUID) -> Group {
         return Group()
     }
     
     static func getPayment(id: UUID) -> Payment {
         return Payment()
+    }
+    
+    static func getUser(id:UUID) -> User{
+        return User()
     }
 }

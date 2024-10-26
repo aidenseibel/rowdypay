@@ -14,7 +14,7 @@ struct rowdypayApp: App {
     var body: some Scene {
         WindowGroup {
             TabView() {
-                BudgetTab()
+                GroupsTab()
                     .tabItem {
                         Label("Groups", systemImage: "square.stack.fill")
                     }

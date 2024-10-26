@@ -8,11 +8,47 @@
 import SwiftUI
 
 struct GroupsDetail: View {
+    let thisgroup: Group
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Text(thisgroup.name)
+            
+            HStack {
+                // Show first 4 users
+                ForEach(Array(thisgroup.users.prefix(4)), id: \.self) { userID in
+                    let user = DataModel.getUser(id: userID)
+                    VStack {
+                        Image(user.image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 40, height: 40)
+                            .background(Color.gray.opacity(0.2))
+                            .clipShape(Circle())
+                        Text(user.username)
+                            .font(.caption)
+                    }
+                }
+                
+                // If there are more than 4 users, show the remaining count
+                if thisgroup.users.count > 4 {
+                    VStack {
+                        ZStack {
+                            Circle()
+                                .fill(Color.gray.opacity(0.2))
+                                .frame(width: 40, height: 40)
+                            Text("+\(thisgroup.users.count - 4)")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                        Text("More")
+                            .font(.caption)
+                    }
+                }
+            }
+            Text("You Owe")
+            
+        }
     }
 }
 
-#Preview {
-    GroupsDetail()
-}
+
