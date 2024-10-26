@@ -30,11 +30,6 @@ struct rowdypayApp: App {
                     }
             }
             .environmentObject(viewModel)
-            .onAppear {
-                DataModel.getPaymentsFromUser(id: 1) { payments in
-                    print(payments)
-                }
-            }
         }
     }
 }

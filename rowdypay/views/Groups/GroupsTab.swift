@@ -1,5 +1,5 @@
 //
-//  BudgetTab.swift
+//  GroupsTab.swift
 //  rowdypay
 //
 //  Created by Aiden Seibel on 10/26/24.
@@ -10,7 +10,7 @@ import SwiftUI
 //  fetch user,  need to fetch all groups from 1 individual user
 //  else, use a random user
 
-struct BudgetTab: View {
+struct GroupsTab: View {
     @State private var groups: [Group] = [
         Group(id: 1, name: "Test Group", image: "beautiful", users: [])
     ]
@@ -30,5 +30,5 @@ struct BudgetTab: View {
 }
 
 #Preview {
-    BudgetTab()
+    GroupsTab()
 }
