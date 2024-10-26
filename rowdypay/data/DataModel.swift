@@ -66,8 +66,7 @@ class DataModel {
                     print("Error performing get_payments: \(error)")
                     return
                 }
-                
-                print(response ?? "no response")
+
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {
                     print("Server error performing get_payments")
@@ -94,7 +93,6 @@ class DataModel {
                                 }
                             }
                             
-                            print(payments)
                             // Call the completion handler with the payments array
                             completion(payments)
                         } else {
@@ -110,8 +108,8 @@ class DataModel {
             print("Error encoding JSON while getting payments from user id.")
         }
     }
-    
-    
+
+
     static func getPayment(id: Int) {
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_payments") else {
             print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_payments")

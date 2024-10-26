@@ -26,7 +26,9 @@ class User: Identifiable, Codable, ObservableObject {
         self.dateJoined = Date()
     }
     
-    func getPayments() -> [Payment]{
-        return sample_payments
+    func getPayments(completion: @escaping ([Payment]) -> Void) {
+        DataModel.getPaymentsFromUser(id: self.id) { payments in
+            completion(payments)
+        }
     }
 }
