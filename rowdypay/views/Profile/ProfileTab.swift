@@ -21,7 +21,7 @@ struct ProfileTab: View {
                     HStack{
                         Spacer()
                         VStack(alignment: .center, spacing: 20){
-                            Image("pfp")
+                            Image(viewModel.localUser.image)
                                 .resizable()
                                 .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
                                 .cornerRadius(screenWidth * 0.35)

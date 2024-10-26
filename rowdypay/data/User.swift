@@ -19,7 +19,7 @@ class User: Identifiable, Codable, ObservableObject {
     init() {
         self.username = "user_1"
         self.email = "user@gmail.com"
-        self.image = "profile"
+        self.image = "sample_profile_image"
         self.groups = []
         self.payments = []
         self.dateJoined = Date()
