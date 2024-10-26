@@ -18,6 +18,7 @@
 		17CD073E2CCD628800EE3B66 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD073D2CCD628800EE3B66 /* Group.swift */; };
 		17CD07402CCD628F00EE3B66 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD073F2CCD628F00EE3B66 /* Payment.swift */; };
 		17CD07422CCD644D00EE3B66 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07412CCD644D00EE3B66 /* DataModel.swift */; };
+		17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		17CD073D2CCD628800EE3B66 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		17CD073F2CCD628F00EE3B66 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		17CD07412CCD644D00EE3B66 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		17CD07482CCD699D00EE3B66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSubView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +68,7 @@
 		17CD07212CCD5F9100EE3B66 /* rowdypay */ = {
 			isa = PBXGroup;
 			children = (
+				17CD07482CCD699D00EE3B66 /* Info.plist */,
 				17CD07222CCD5F9100EE3B66 /* rowdypayApp.swift */,
 				17CD07312CCD5FC300EE3B66 /* data */,
 				17CD07302CCD5FBC00EE3B66 /* views */,
@@ -132,6 +136,7 @@
 		17CD07472CCD658C00EE3B66 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 				17CD073E2CCD628800EE3B66 /* Group.swift in Sources */,
 				17CD073A2CCD600200EE3B66 /* ViewModel.swift in Sources */,
 				17CD07382CCD5FED00EE3B66 /* GroupsTab.swift in Sources */,
+				17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */,
 				17CD073C2CCD628200EE3B66 /* User.swift in Sources */,
 				17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */,
 				17CD07332CCD5FD300EE3B66 /* ProfileTab.swift in Sources */,
@@ -351,6 +357,7 @@
 				DEVELOPMENT_TEAM = C72D493DTH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = rowdypay/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -380,6 +387,7 @@
 				DEVELOPMENT_TEAM = C72D493DTH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = rowdypay/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
