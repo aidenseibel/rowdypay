@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct ScanReceiptView: View {
-    @EnvironmentObject var viewModel: ViewModel
+//    @EnvironmentObject var viewModel: ViewModel
     @Binding var navigationPath: NavigationPath
 
     @State var showImagePicker = false
@@ -22,80 +22,106 @@ struct ScanReceiptView: View {
     let screenWidth = UIScreen.main.bounds.width
 
     var body: some View {
-        VStack {
-            Spacer()
-            
-            if let uiImage = image {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .frame(width: screenWidth * 0.80, height: screenWidth * 1.20)
-                    .scaledToFill()
-                    .clipped()
-            } else {
-                Text("No Image Selected")
-                    .foregroundColor(.gray)
-            }
-
-            HStack {
-                Button(action: {
-                    sourceType = .camera // Choose Camera
-                    showImagePicker = true
-                }) {
-                    Text("Open Camera")
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
-
-                Button(action: {
-                    sourceType = .photoLibrary // Choose Photo Library
-                    showImagePicker = true
-                }) {
-                    Text("Open Photo Library")
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                }
-            }
-
-            Spacer()
-            
-            Button {
-                if let image = image {
-                    DataModel.sendImageForAnalysis(image: image) { (success, price) in
-                        if success {
-                            // Set the price and trigger navigation
-                            self.analysisPrice = price
-                            self.navigateToConfirmation = true // Activate navigation
+        ScrollView{
+            VStack(alignment: .leading, spacing: 20) {
+                if let uiImage = image {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: screenWidth * 0.90, height: screenWidth * 1.10)
+                        .clipped()
+                } else {
+                    VStack(alignment: .leading) {
+                        Button(action: {
+                            sourceType = .camera
+                            showImagePicker = true
+                        }) {
+                            HStack{
+                                Image(systemName: "camera.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundColor(.gray)
+                                    .frame(width: 50, height: 50)
+                                VStack(alignment: .leading, spacing: 2){
+                                    Text("Open Camera")
+                                        .bold()
+                                    Text("Take a photo of your receipt")
+                                        .font(.system(size: 12))
+                                        .lineLimit(1)
+                                }
+                                Spacer()
+                            }
+                            .padding()
+                            .background(.darkGray)
+                            .cornerRadius(10)
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
+                            
                         }
+                        .buttonStyle(.plain)
+                        
+                        Button(action: {
+                            sourceType = .photoLibrary
+                            showImagePicker = true
+                        }) {
+                            HStack{
+                                Image(systemName: "photo.on.rectangle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundColor(.gray)
+                                    .frame(width: 50, height: 50)
+                                VStack(alignment: .leading, spacing: 2){
+                                    Text("Use photo library")
+                                        .bold()
+                                    Text("Upload a photo of your receipt")
+                                        .font(.system(size: 12))
+                                        .lineLimit(1)
+                                }
+                                Spacer()
+                            }
+                            .padding()
+                            .background(.darkGray)
+                            .cornerRadius(10)
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
-            } label: {
-                HStack {
-                    Spacer()
-                    Text("Analyze")
-                    Spacer()
+                                
+                if let image = image{
+                    Button {
+                        DataModel.sendImageForAnalysis(image: image) { (success, price) in
+                            if success {
+                                // Set the price and trigger navigation
+                                self.analysisPrice = price
+                                self.navigateToConfirmation = true // Activate navigation
+                            }
+                        }
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("Analyze")
+                            Spacer()
+                        }
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(.orange)
+                        .cornerRadius(10)
+                    }
                 }
-                .padding()
-                .foregroundColor(.white)
-                .background(.orange)
-                .cornerRadius(10)
-                .padding()
+                
+                // NavigationLink that is activated by the state variable
+                NavigationLink(destination: ConfirmAddFromReceiptView(navigationPath: $navigationPath, price: analysisPrice ?? 10.0), isActive: $navigateToConfirmation) {
+                    EmptyView() // This link is not shown in the UI
+                }
             }
-
-            // NavigationLink that is activated by the state variable
-            NavigationLink(destination: ConfirmAddFromReceiptView(navigationPath: $navigationPath, price: analysisPrice ?? 10.0), isActive: $navigateToConfirmation) {
-                EmptyView() // This link is not shown in the UI
+            .padding()
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(image: $image, sourceType: sourceType)
             }
-        }
-        .sheet(isPresented: $showImagePicker) {
-            ImagePicker(image: $image, sourceType: sourceType)
-        }
-        .navigationTitle("Scan a receipt")
-        .onAppear{
-            viewModel.isTabBarShowing = false
+            .navigationTitle("Scan a receipt")
+            .onAppear{
+                //            viewModel.isTabBarShowing = false
+            }
         }
     }
 }

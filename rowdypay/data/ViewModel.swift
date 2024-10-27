@@ -10,6 +10,7 @@ import Foundation
 public class ViewModel: ObservableObject {
     @Published var localUser: User
     @Published var isTabBarShowing: Bool = true
+    @Published var hasOnboarded: Bool = false
     
     init() {
         localUser = User()
