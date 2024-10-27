@@ -68,10 +68,14 @@ struct UserAvatarView: View {
 
             Circle()
                 .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
+                .shimmering(
+                    gradient: Gradient(colors: [.clear, .orange, .clear]),
+                    bandSize: 0.5,
+                    mode: .overlay()
+                )
                 .cornerRadius(screenWidth * 0.35)
                 .padding()
                 .opacity(0.10)
-                .shimmering()
         }
     }
 }

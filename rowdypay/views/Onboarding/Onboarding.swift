@@ -41,12 +41,13 @@ struct Onboarding: View {
                     Text("Welcome to RowdyPay")
                         .font(.system(size: 42))
                         .bold()
-                    
+                                        
                     Picker("driving", selection: $onboardingMode) {
                         ForEach(onboardingOptions, id: \.self){option in
                             Text("\(option)")
                         }
                     }.pickerStyle(.segmented).shadow(radius: 8)
+                        .opacity(1.0)
                     
                     if onboardingMode == "Log In"{
                         VStack(alignment: .leading, spacing: 10){
@@ -57,12 +58,14 @@ struct Onboarding: View {
                                 .padding(10)
                                 .background(Color(.darkerGray))
                                 .cornerRadius(10)
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
                             SecureField("Password...", text: $logInPassword)
                                 .autocorrectionDisabled()
                                 .textInputAutocapitalization(.never)
                                 .padding(10)
                                 .background(Color(.darkerGray))
                                 .cornerRadius(10)
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
                             
                             
                             Button {
@@ -85,6 +88,8 @@ struct Onboarding: View {
                                 .padding(10)
                                 .background(Color(.darkerGray))
                                 .cornerRadius(10)
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
+
                             TextField("Email...", text: $signUpEmail)
                                 .autocorrectionDisabled()
                                 .textInputAutocapitalization(.never)
@@ -92,18 +97,23 @@ struct Onboarding: View {
                                 .padding(10)
                                 .background(Color(.darkerGray))
                                 .cornerRadius(10)
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
+
                             SecureField("Password...", text: $signUpPassword)
                                 .autocorrectionDisabled()
                                 .textInputAutocapitalization(.never)
                                 .padding(10)
                                 .background(Color(.darkerGray))
                                 .cornerRadius(10)
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
+
                             SecureField("Confirm Password...", text: $signUpPasswordConfirm)
                                 .autocorrectionDisabled()
                                 .textInputAutocapitalization(.never)
                                 .padding(10)
                                 .background(Color(.darkerGray))
                                 .cornerRadius(10)
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
                             
                             
                             Button {
@@ -123,6 +133,7 @@ struct Onboarding: View {
                             .foregroundStyle(.red)
                     }
                 }
+                .padding(.bottom, 100)
                 .padding()
             }
         }

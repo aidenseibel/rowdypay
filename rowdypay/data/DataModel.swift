@@ -13,8 +13,8 @@ class DataModel {
 
     //MARK: HELLO WORLD
     static func getHelloWorld() {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/hello_world") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/hello_world")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/hello_world") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/hello_world")
             return
         }
                 
@@ -47,8 +47,8 @@ class DataModel {
     
     // MARK: GET GROUP
     static func getGroup(id: Int, completion: @escaping (Group) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_group") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_group")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/get_group") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/get_group")
             return
         }
         
@@ -95,8 +95,8 @@ class DataModel {
     
     //MARK: GET USER
     static func getUser(id: Int, completion: @escaping (Result<User, Error>) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_user") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_user")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/get_user") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/get_user")
             completion(.failure(URLError(.badURL)))
             return
         }
@@ -146,8 +146,8 @@ class DataModel {
 
     //MARK: GET PAYMENT
     static func getPayment(id: Int, completion: @escaping (Payment) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_payment") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_payment")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/get_payment") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/get_payment")
             return
         }
         
@@ -192,8 +192,8 @@ class DataModel {
 
     //MARK: GET PAYMENTS FROM USER
     static func getPaymentsFromUser(id: Int, completion: @escaping ([Payment]) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_user_payments") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_user_payments")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/get_user_payments") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/get_user_payments")
             return
         }
                 
@@ -258,8 +258,8 @@ class DataModel {
     
     //MARK: GET PAYMENTS FROM GROUP
     static func getPaymentsFromGroup(id: Int, completion: @escaping ([Payment]) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_group_payments") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_group_payments")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/get_group_payments") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/get_group_payments")
             return
         }
                 
@@ -325,7 +325,7 @@ class DataModel {
     //MARK: GET GROUPS FROM USER
     static func getGroupsFromUser(id: Int, completion: @escaping ([Group]) -> Void) {
         
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_groups") else {
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/get_groups") else {
             print("DataModel: Invalid URL")
             return
         }
@@ -392,8 +392,8 @@ class DataModel {
     static func getUsersFromGroup(id: Int, completion: @escaping ([User]) -> Void) {
         print("Starting getUsersFromGroup for group ID:", id)
         
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_users_by_group") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_users_by_group")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/get_users_by_group") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/get_users_by_group")
             return
         }
                     
@@ -458,8 +458,8 @@ class DataModel {
         }
     }
     static func getBalances(userID: Int, groupID: Int, completion: @escaping (Result<Double, Error>) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_balance") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_balance")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/get_balance") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/get_balance")
             completion(.failure(URLError(.badURL)))
             return
         }
@@ -518,8 +518,8 @@ class DataModel {
     }
     // MARK: SUBMIT REQUEST (RETURN SUCCESS)
     static func updateBalances(userID: Int, userIDs: [Int], groupID: Int, amount: Double, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/update_balances") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/update_balances")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/update_balances") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/update_balances")
             return
         }
                 
@@ -561,8 +561,8 @@ class DataModel {
         }
     }
     static func leavingGroup(userID:Int, groupID:Int, completion: @escaping(Bool) ->Void){
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/leave_group") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/leave_group")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/leave_group") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/leave_group")
             completion(false)
             return
         }
@@ -607,8 +607,8 @@ class DataModel {
 
     
     static func makePayment(userID: Int, groupID: Int, amount: Double, description: String? = nil, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/make_payment") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/make_payment")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/make_payment") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/make_payment")
             completion(false)
             return
         }
@@ -661,8 +661,8 @@ class DataModel {
     }
     
     static func createGroup(groupName: String, image: String, users:[Int],creatorID:Int, completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/create_group") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/create_group")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/create_group") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/create_group")
             return
         }
         
@@ -816,8 +816,8 @@ class DataModel {
     }
     
     static func createUser(display_name: String, email: String, completion: @escaping (User) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/create_user") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/create_user")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/create_user") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/create_user")
             return
         }
         
@@ -863,8 +863,8 @@ class DataModel {
     }
     
     static func authUser(email: String, completion: @escaping (User) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/auth_user") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/auth_user")
+        guard let url = URL(string: "https://f781-129-115-2-245.ngrok-free.app/api/auth_user") else {
+            print("URL not found: https://f781-129-115-2-245.ngrok-free.app/api/auth_user")
             return
         }
         
