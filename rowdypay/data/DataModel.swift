@@ -246,132 +246,142 @@ class DataModel {
     }
     
     //MARK: GET GROUPS FROM USER
-    static func getPaymentsFromUser(id: Int, completion: @escaping ([Group]) -> Void) {
+    static func getGroupsFromUser(id: Int, completion: @escaping ([Group]) -> Void) {
+        print("DataModel: Starting getGroupsFromUser for ID:", id)
+        
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_groups") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_groups")
+            print("DataModel: Invalid URL")
             return
         }
-                
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let parameters: [String: Any] = ["user_id": id]
         
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters)
             request.httpBody = jsonData
-
+            
+            print("DataModel: Making network request...")
+            
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    print("Error performing get_groups: \(error)")
+                    print("DataModel: Network error:", error)
                     return
                 }
-
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
-                    print("Server error performing get_groups")
-                    return
+                
+                if let httpResponse = response as? HTTPURLResponse {
+                    print("DataModel: Response status code:", httpResponse.statusCode)
                 }
-
+                
                 if let data = data {
+                    print("DataModel: Received data:", String(data: data, encoding: .utf8) ?? "")
+                    
                     do {
-                        // Try to convert to an array of dictionaries
                         let json = try JSONSerialization.jsonObject(with: data, options: [])
+                        print("DataModel: Parsed JSON:", json)
+                        
                         if let dict = json as? [[String: Any]] {
                             var groups: [Group] = []
                             
                             for g in dict {
                                 do {
-                                    // Convert dictionary to JSON data
-                                    let groupData = try JSONSerialization.data(withJSONObject: g, options: [])
-                                    
-                                    // Decode the JSON data into a Payment object
+                                    let groupData = try JSONSerialization.data(withJSONObject: g)
                                     let group = try JSONDecoder().decode(Group.self, from: groupData)
                                     groups.append(group)
                                 } catch {
-                                    print("Error decoding group: \(error)")
+                                    print("DataModel: Error decoding group:", error)
                                 }
                             }
-
-                            // Call the completion handler with the payments array
+                            
+                            print("DataModel: Successfully decoded \(groups.count) groups")
                             completion(groups)
                         } else {
-                            print("Failed parsing JSON as array of dictionaries")
+                            print("DataModel: Failed to parse JSON as array")
+                            completion([])
                         }
                     } catch {
-                        print("Something went wrong with JSON parsing: \(error)")
+                        print("DataModel: JSON parsing error:", error)
+                        completion([])
                     }
                 }
-            }
-            .resume()
+            }.resume()
         } catch {
-            print("Error encoding JSON while getting payments from user id.")
+            print("DataModel: JSON encoding error:", error)
         }
     }
     
     //MARK: GET USERS FROM GROUP
     static func getUsersFromGroup(id: Int, completion: @escaping ([User]) -> Void) {
+        print("Starting getUsersFromGroup for group ID:", id)
+        
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_users_by_group") else {
             print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_users_by_group")
             return
         }
-                
+                    
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let parameters: [String: Any] = ["group_id": id]
         
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters)
             request.httpBody = jsonData
+            print("Sending request with group_id:", id)
 
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    print("Error performing get_groups: \(error)")
+                    print("Network error:", error)
                     return
                 }
 
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
-                    print("Server error performing get_groups")
-                    return
+                if let httpResponse = response as? HTTPURLResponse {
+                    print("Response status code:", httpResponse.statusCode)
                 }
 
                 if let data = data {
+                    // Print raw response
+                    print("Raw response data:", String(data: data, encoding: .utf8) ?? "")
+                    
                     do {
-                        // Try to convert to an array of dictionaries
                         let json = try JSONSerialization.jsonObject(with: data, options: [])
+                        print("Parsed JSON:", json)
+                        
                         if let dict = json as? [[String: Any]] {
+                            print("Number of users in response:", dict.count)
                             var users: [User] = []
                             
-                            for u in dict {
+                            for (index, u) in dict.enumerated() {
                                 do {
-                                    // Convert dictionary to JSON data
-                                    let userData = try JSONSerialization.data(withJSONObject: u, options: [])
-                                    
-                                    // Decode the JSON data into a Payment object
+                                    let userData = try JSONSerialization.data(withJSONObject: u)
                                     let user = try JSONDecoder().decode(User.self, from: userData)
+                                    print("Successfully decoded user \(index + 1):", user.username)
                                     users.append(user)
                                 } catch {
-                                    print("Error decoding group: \(error)")
+                                    print("Error decoding user \(index + 1):", error)
+                                    print("Problem user data:", u)
                                 }
                             }
 
-                            // Call the completion handler with the payments array
+                            print("Final number of decoded users:", users.count)
+                            print("User names:", users.map { $0.username })
                             completion(users)
                         } else {
-                            print("Failed parsing JSON as array of dictionaries")
+                            print("Failed to parse JSON as array. Actual type:", type(of: json))
                         }
                     } catch {
-                        print("Something went wrong with JSON parsing: \(error)")
+                        print("JSON parsing error:", error)
                     }
+                } else {
+                    print("No data received from server")
                 }
             }
             .resume()
         } catch {
-            print("Error encoding JSON while getting payments from user id.")
+            print("Request creation error:", error)
         }
     }
+
 }

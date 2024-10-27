@@ -12,12 +12,17 @@ struct GroupSubView: View {
     
     var body: some View {
         HStack {
-            Image(group.image)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 40, height: 40)
-                .background(Color.gray.opacity(0.2))
-                .clipShape(Circle())
+            AsyncImage(url: URL(string: group.image)) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
+            } placeholder: {
+                Circle()
+                    .fill(Color.gray.opacity(0.2))
+                    .frame(width: 40, height: 40)
+            }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(group.name)
@@ -29,9 +34,7 @@ struct GroupSubView: View {
             .padding(.leading, 8)
             
             Spacer()
-            
-            Image(systemName: "chevron.right")
-                .foregroundColor(.gray)
+
         }
         .padding(.vertical, 8)
 

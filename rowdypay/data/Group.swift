@@ -19,7 +19,7 @@ class Group: Identifiable, Codable, Hashable {
     var id: Int
     var name: String
     var image: String
-    var users: [Int]
+    var users: [User]
     
     // for json decoding
     enum CodingKeys: String, CodingKey {
@@ -37,7 +37,7 @@ class Group: Identifiable, Codable, Hashable {
         self.users = []
     }
     
-    init(id: Int, name: String, image: String, users: [Int]) {
+    init(id: Int, name: String, image: String, users: [User]) {
         self.id = id
         self.name = name
         self.image = image
@@ -50,6 +50,6 @@ class Group: Identifiable, Codable, Hashable {
         self.id = try container.decode(Int.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
         self.image = try container.decode(String.self, forKey: .image)
-        self.users = try container.decode([Int].self, forKey: .users)
+        self.users = try container.decode([User].self, forKey: .users)
     }
 }
