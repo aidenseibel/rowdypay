@@ -19,15 +19,42 @@ struct GroupSubView: View {
     @State private var amount: Double = 2.0
     var body: some View {
         HStack {
-            Image(group.image)
-                .resizable()
-                .scaledToFill()
-                .frame(width: screenWidth * 0.3, height: screenWidth * 0.3)
-                .cornerRadius(10)
-
+            if let url = URL(string: group.image), UIApplication.shared.canOpenURL(url) {
+                // If it's a URL, load asynchronously
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView() // Shows loading indicator
+                            .frame(width: screenWidth * 0.3, height: screenWidth * 0.3)
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: screenWidth * 0.3, height: screenWidth * 0.3)
+                            .cornerRadius(10)
+                    case .failure:
+                        Image(systemName: "photo") // Placeholder for failed load
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: screenWidth * 0.3, height: screenWidth * 0.3)
+                            .cornerRadius(10)
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+            } else {
+                // Otherwise, assume it's a local asset
+                Image(group.image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: screenWidth * 0.3, height: screenWidth * 0.3)
+                    .cornerRadius(10)
+            }
+            
             VStack(alignment: .leading, spacing: 6) {
                 Text(group.name)
                     .font(.system(size: 22))
+                    .lineLimit(1)
                     .bold()
                 Text("\(group.users.count) members")
                     .font(.system(size: 14))
@@ -53,7 +80,15 @@ struct GroupSubView: View {
                         
                     }
                 }
-                Text("Amount Owe: $\(amount, specifier: "%.2f")")
+                Text("Amount Owed: ")
+                    .font(.system(size: 14))
+                    .foregroundColor(.gray)
+                +
+                Text("$\(amount, specifier: "%.2f")")
+                    .bold()
+                    .font(.system(size: 14))
+                    .foregroundColor(.gray)
+
             }
             .padding(.leading, 8)
 
