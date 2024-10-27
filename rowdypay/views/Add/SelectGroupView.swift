@@ -22,7 +22,10 @@ struct SelectGroupView: View {
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         GroupSubView(group: group)
+                            .padding()
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
                     }
+                    .buttonStyle(.plain)
                     .padding()
                 }
             }

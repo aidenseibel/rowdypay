@@ -22,11 +22,15 @@ struct ConfirmAddFromReceiptView: View {
             Text("confirm amount")
                 .padding(.top, 50)
             
-            HStack {
+            HStack(alignment: .center, spacing: 1) {
+                Spacer()
+                Text("$")
+                    .font(.system(size: 24))
+                    .bold()
                 Text(String(format: "%.2f", price))
                     .font(.system(size: 60))
                     .bold()
-                    .padding()
+                Spacer()
             }
             
             
@@ -41,8 +45,7 @@ struct ConfirmAddFromReceiptView: View {
             Button {
                 if let group = selectedGroup {
                     let userID = viewModel.localUser.id
-//                    let allOtherUsers = group.users
-                    let allOtherUsers: [Int] = []
+                    let allOtherUsers = group.users
 
                     DataModel.updateBalances(userID: userID, userIDs: allOtherUsers, groupID: group.id, amount: price) { success in
                         
@@ -63,6 +66,7 @@ struct ConfirmAddFromReceiptView: View {
                 .foregroundColor(.white)
                 .background(.orange)
                 .cornerRadius(10)
+                .padding()
             }
         }
         .padding(10)

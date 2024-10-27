@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct ProfileTab: View {
     @EnvironmentObject var viewModel: ViewModel
@@ -23,15 +24,24 @@ struct ProfileTab: View {
                     HStack {
                         Spacer()
                         VStack(alignment: .center, spacing: 20) {
-                            Image(viewModel.localUser.image)
-                                .resizable()
-                                .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
-                                .cornerRadius(screenWidth * 0.35)
-                                .padding()
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.white, lineWidth: 1)
-                                )
+                            ZStack{
+                                Image(viewModel.localUser.image)
+                                    .resizable()
+                                    .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
+                                    .cornerRadius(screenWidth * 0.35)
+                                    .padding()
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color.gray, lineWidth: 1)
+                                    )
+
+                                Circle()
+                                    .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
+                                    .cornerRadius(screenWidth * 0.35)
+                                    .padding()
+                                    .opacity(0.10)
+                                    .shimmering()
+                            }
                             
                             VStack(alignment: .center, spacing: 7) {
                                 Text(viewModel.localUser.username) // Assuming 'username' is a property in localUser
@@ -48,13 +58,47 @@ struct ProfileTab: View {
                     
                     // MARK: RECENT PAYMENTS
                     VStack(alignment: .leading, spacing: 15) {
+                        Text("My statistics")
+                            .font(.system(size: 24))
+                            .bold()
+                        
+                        HStack(alignment: .center, spacing: 10){
+                                Image("a")
+                                .resizable()
+                                .frame(width: screenWidth * 0.25, height: screenWidth * 0.25)
+                                .scaledToFill()
+                                .cornerRadius(10)
+                            
+                                VStack(alignment: .leading, spacing: 7){
+                                    Text("Your Reliability: ") + Text("Stellar")
+                                        .font(.system(size: 18))
+                                        .bold()
+                                    Text("You've been making regular payments and keeping up with your groups. Good job!")
+                                        .font(.system(size: 14))
+                                        .foregroundStyle(.gray)
+                                }
+
+                            Spacer()
+                        }
+                        .padding(8)
+                        .background(Color(.darkerGray))
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
+                    }
+                    
+                    // MARK: RECENT PAYMENTS
+                    VStack(alignment: .leading, spacing: 15) {
                         Text("Recent Payments")
                             .font(.system(size: 24))
                             .bold()
                         
                         if isLoading {
-                            // Loading indicator
-                            ProgressView("Loading payments...")
+                            HStack{
+                                Spacer()
+                                ProgressView("Loading payments...")
+                                Spacer()
+                            }
+                            .padding(20)
+                            
                         } else if let errorMessage = errorMessage {
                             // Show error message
                             Text("Error: \(errorMessage)")
@@ -75,6 +119,11 @@ struct ProfileTab: View {
                 .onAppear {
                     fetchPayments()
                 }
+            }
+            .navigationTitle("my profile")
+            .refreshable {
+                isLoading = true
+                fetchPayments()
             }
         }
     }

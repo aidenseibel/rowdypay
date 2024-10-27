@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1711C5CF2CCDE6C30061C334 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1711C5CE2CCDE6C30061C334 /* TabBar.swift */; };
 		17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07222CCD5F9100EE3B66 /* rowdypayApp.swift */; };
 		17CD07272CCD5F9200EE3B66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17CD07262CCD5F9200EE3B66 /* Assets.xcassets */; };
 		17CD072A2CCD5F9200EE3B66 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17CD07292CCD5F9200EE3B66 /* Preview Assets.xcassets */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1711C5CE2CCDE6C30061C334 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		17CD071F2CCD5F9100EE3B66 /* rowdypay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rowdypay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17CD07222CCD5F9100EE3B66 /* rowdypayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rowdypayApp.swift; sourceTree = "<group>"; };
 		17CD07262CCD5F9200EE3B66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */,
 				17CD074B2CCD785C00EE3B66 /* PaymentSubView.swift */,
+				1711C5CE2CCDE6C30061C334 /* TabBar.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			files = (
 				17CD074C2CCD785C00EE3B66 /* PaymentSubView.swift in Sources */,
 				17DA9C532CCDAB1200F54F8B /* SelectGroupView.swift in Sources */,
+				1711C5CF2CCDE6C30061C334 /* TabBar.swift in Sources */,
 				17CD073E2CCD628800EE3B66 /* Group.swift in Sources */,
 				17CD073A2CCD600200EE3B66 /* ViewModel.swift in Sources */,
 				17CD07382CCD5FED00EE3B66 /* GroupsTab.swift in Sources */,

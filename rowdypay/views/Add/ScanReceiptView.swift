@@ -9,15 +9,17 @@ import SwiftUI
 import UIKit
 
 struct ScanReceiptView: View {
+    @EnvironmentObject var viewModel: ViewModel
     @Binding var navigationPath: NavigationPath
 
-    @State private var showImagePicker = false
-    @State private var image: UIImage? = nil
-    @State private var sourceType: UIImagePickerController.SourceType = .camera
+    @State var showImagePicker = false
+    @State var image: UIImage? = nil
+    @State var sourceType: UIImagePickerController.SourceType = .camera
     
-    @State private var navigateToConfirmation = false
-    @State private var analysisPrice: Double?
+    @State var navigateToConfirmation = false
+    @State var analysisPrice: Double?
 
+    let screenWidth = UIScreen.main.bounds.width
 
     var body: some View {
         VStack {
@@ -26,8 +28,9 @@ struct ScanReceiptView: View {
             if let uiImage = image {
                 Image(uiImage: uiImage)
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 300, height: 300)
+                    .frame(width: screenWidth * 0.80, height: screenWidth * 1.20)
+                    .scaledToFill()
+                    .clipped()
             } else {
                 Text("No Image Selected")
                     .foregroundColor(.gray)
@@ -79,6 +82,7 @@ struct ScanReceiptView: View {
                 .foregroundColor(.white)
                 .background(.orange)
                 .cornerRadius(10)
+                .padding()
             }
 
             // NavigationLink that is activated by the state variable
@@ -90,6 +94,9 @@ struct ScanReceiptView: View {
             ImagePicker(image: $image, sourceType: sourceType)
         }
         .navigationTitle("Scan a receipt")
+        .onAppear{
+            viewModel.isTabBarShowing = false
+        }
     }
 }
 

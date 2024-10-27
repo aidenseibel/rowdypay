@@ -9,25 +9,26 @@ import SwiftUI
 
 @main
 struct rowdypayApp: App {
+    @State var selectedTab: Tab = .profile
     @StateObject var viewModel = ViewModel()
 
     var body: some Scene {
         WindowGroup {
-            TabView() {
-                GroupsTab()
-                    .tabItem {
-                        Label("Groups", systemImage: "square.stack.fill")
-                    }
+            ZStack {
+                VStack {
+                    TabView(selection: $selectedTab) {
+                        GroupsTab().tag(Tab.groups)
+                        AddTab().tag(Tab.add)
+                        ProfileTab().tag(Tab.profile)
+                    }.environmentObject(viewModel)
+                }
 
-                AddTab()
-                    .tabItem {
-                        Label("Add", systemImage: "plus.circle.fill")
+                if viewModel.isTabBarShowing {
+                    VStack {
+                        Spacer()
+                        TabBar(selectedTab: $selectedTab)
                     }
-
-                ProfileTab()
-                    .tabItem {
-                        Label("Profile", systemImage: "person.circle.fill")
-                    }
+                }
             }
             .environmentObject(viewModel)
         }
