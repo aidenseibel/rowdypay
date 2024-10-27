@@ -17,19 +17,22 @@ struct PaymentSubView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 10){
-            if let group = group{
-                Image(group.image)
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(10)
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(.white, lineWidth: 1))
-                
+            if let group = group {
+                AsyncImage(url: URL(string: group.image)) { image in
+                    image
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .cornerRadius(8)
+                } placeholder: {
+                    RoundedRectangle(cornerSize: CGSize(width: 8, height: 8))
+                        .frame(width: 50, height: 50)
+                }
                 
                 VStack(alignment: .leading, spacing: 7){
-                    Text("$" + String(format: "%.2f", payment.amount)+" to \(group.name)")
+                    Text("$" + String(format: "%.2f", payment.amount) + " to \(group.name)")
                         .lineLimit(1)
                         .font(.system(size: 16))
-                    HStack{
+                    HStack {
                         Text(formatDateToCustomString(date: payment.date))
                             .font(.system(size: 12))
                         Image(systemName: "circle.fill")
@@ -40,15 +43,15 @@ struct PaymentSubView: View {
                     }
                 }
             } else {
-                // Placeholder while loading
-                ProgressView("Loading...")
-                    .frame(width: 50, height: 50)
+                RoundedRectangle(cornerSize: CGSize(width: 8, height: 8))
+                    .frame(width: UIScreen.main.bounds.width * 0.90, height: 70)
             }
+
             Spacer()
         }
-
         .padding(8)
-        .overlay(RoundedRectangle(cornerRadius: 10).stroke(.white, lineWidth: 1))
+        .background(Color(.darkerGray))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
         .onAppear {
             DataModel.getGroup(id: payment.group) { fetchedGroup in
                 self.group = fetchedGroup

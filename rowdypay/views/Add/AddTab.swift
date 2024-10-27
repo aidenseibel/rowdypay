@@ -17,31 +17,39 @@ struct AddTab: View {
         NavigationStack {
             ScrollView{
                 VStack(alignment: .leading, spacing: 40){
-                    Text("How would you like to add a budget request?")
-                    
                     NavigationLink {
                         AddManuallyView()
                     } label: {
                         HStack(spacing: 15){
-                            Image("sample_profile_image")
-                                .resizable()
-                                .frame(width: screenWidth * 0.25, height: screenWidth * 0.25)
-                                .cornerRadius(10)
-                                
-
-                            VStack(alignment: .leading, spacing: 10){
+                            VStack(alignment: .leading, spacing: 7){
                                 Text("Add manually")
                                     .font(.system(size: 22))
                                     .bold()
-                                Text("Enter the details manually")
-                                    .font(.system(size: 14))
+                                Text("Enter the price details manually to add a request to a group.")
+                                    .font(.system(size: 12))
+                                    .foregroundStyle(.gray)
                             }
                             Spacer()
+                            
+                            ZStack(alignment: .bottomTrailing){
+                                Image("enter_manually_image")
+                                    .resizable()
+                                    .frame(width: screenWidth * 0.25, height: screenWidth * 0.45)
+                                    .scaledToFill()
+                                    .cornerRadius(10)
+                                Image(systemName: "arrow.right.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .padding(5)
+                            }
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
+
                         }
                         .padding()
+                        .background(Color(.darkerGray))
                         .overlay(
                             RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
-                                .stroke(Color.white, lineWidth: 1)
+                                .stroke(Color.gray, lineWidth: 1)
                         )
                     }
                     .buttonStyle(.plain)
@@ -50,33 +58,45 @@ struct AddTab: View {
                         ScanReceiptView(navigationPath: $navigationPath)
                     } label: {
                         HStack(spacing: 15){
-                            Image("sample_profile_image")
-                                .resizable()
-                                .frame(width: screenWidth * 0.25, height: screenWidth * 0.25)
-                                .cornerRadius(10)
-                            
-                            VStack(alignment: .leading, spacing: 10){
+                            VStack(alignment: .leading, spacing: 7){
                                 Text("Scan a receipt")
                                     .font(.system(size: 22))
                                     .bold()
-                                Text("Use our tool to read in details automatically")
-                                    .font(.system(size: 14))
+                                Text("Use your phone's camera to read a receipt and autofill the price details.")
+                                    .font(.system(size: 12))
+                                    .foregroundStyle(.gray)
                             }
                             Spacer()
+
+                            ZStack(alignment: .bottomTrailing){
+                                Image("scan_receipt_image")
+                                    .resizable()
+                                    .frame(width: screenWidth * 0.25, height: screenWidth * 0.45)
+                                    .scaledToFill()
+                                    .cornerRadius(10)
+                                Image(systemName: "arrow.right.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .padding(5)
+                            }
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
                         }
                         .padding()
+                        .background(Color(.darkerGray))
                         .overlay(
                             RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
-                                .stroke(Color.white, lineWidth: 1)
+                                .stroke(Color.gray, lineWidth: 1)
                         )
                     }
                     .buttonStyle(.plain)
-
                 }
                 .padding(10)
             }
             .navigationTitle("Add a new request")
             .navigationBarTitleDisplayMode(.large)
+            .onAppear{
+                viewModel.isTabBarShowing = true
+            }
         }
     }
 }

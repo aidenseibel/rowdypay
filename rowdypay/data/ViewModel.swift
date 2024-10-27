@@ -9,6 +9,7 @@ import Foundation
 
 public class ViewModel: ObservableObject {
     @Published var localUser: User
+    @Published var isTabBarShowing: Bool = true
     
     init() {
         localUser = User()

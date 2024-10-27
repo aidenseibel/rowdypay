@@ -6,7 +6,8 @@ struct AddManuallyView: View {
     @FocusState private var isTextFieldFocused: Bool // Control focus state
     @State var selectedGroup: Group?
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    @State var showGroupErrorText: Bool = false
+    @State var showAmountErrorText: Bool = false
     
     var screenWidth = UIScreen.main.bounds.width
     
@@ -37,38 +38,55 @@ struct AddManuallyView: View {
 
             Spacer()
             
-            Button {
-                if let amount = Double(price){
-                    if let group = selectedGroup {
-                        let userID = viewModel.localUser.id
-//                        let allOtherUsers = group.users
-                        let allOtherUsers: [Int] = []
-
-                        DataModel.updateBalances(userID: userID, userIDs: allOtherUsers, groupID: group.id, amount: amount) { success in
+            
+            VStack(alignment: .center, spacing: 5){
+                if showAmountErrorText {
+                    Text("Enter a proper amount to continue!")
+                        .font(.system(size: 14))
+                } else if showGroupErrorText {
+                    Text("Select a group to continue!")
+                        .font(.system(size: 14))
+                }
+                
+                Button {
+                    if let amount = Double(price){
+                        if let group = selectedGroup {
+                            let userID = viewModel.localUser.id
+                            let allOtherUsers = group.users
                             
-                            if success {
-                                DispatchQueue.main.async {
-                                    presentationMode.wrappedValue.dismiss()
+                            DataModel.updateBalances(userID: userID, userIDs: allOtherUsers, groupID: group.id, amount: amount) { success in
+                                
+                                if success {
+                                    DispatchQueue.main.async {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
                                 }
                             }
+                        } else {
+                            showGroupErrorText = true
                         }
+                    } else {
+                        showAmountErrorText = true
                     }
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Submit")
+                        Spacer()
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(.orange)
+                    .cornerRadius(10)
+                    .padding()
                 }
-            } label: {
-                HStack {
-                    Spacer()
-                    Text("Submit")
-                    Spacer()
-                }
-                .padding()
-                .foregroundColor(.white)
-                .background(.orange)
-                .cornerRadius(10)
             }
         }
         .padding(10)
         .navigationTitle("Add manually")
         .onAppear {
+            viewModel.isTabBarShowing = false
+            
             if let group = selectedGroup {
                 isTextFieldFocused = false
             }
