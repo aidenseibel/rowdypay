@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct AddTab: View {
     @EnvironmentObject var viewModel: ViewModel
@@ -37,6 +38,7 @@ struct AddTab: View {
                                     .frame(width: screenWidth * 0.25, height: screenWidth * 0.45)
                                     .scaledToFill()
                                     .cornerRadius(10)
+                                    .shimmering()
                                 Image(systemName: "arrow.right.circle.fill")
                                     .resizable()
                                     .frame(width: 30, height: 30)
@@ -74,6 +76,7 @@ struct AddTab: View {
                                     .frame(width: screenWidth * 0.25, height: screenWidth * 0.45)
                                     .scaledToFill()
                                     .cornerRadius(10)
+                                    .shimmering()
                                 Image(systemName: "arrow.right.circle.fill")
                                     .resizable()
                                     .frame(width: 30, height: 30)

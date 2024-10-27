@@ -69,12 +69,12 @@ struct ProfileTab: View {
                                 .scaledToFill()
                                 .cornerRadius(10)
                             
-                                VStack(alignment: .leading, spacing: 7){
+                                VStack(alignment: .leading, spacing: 5){
                                     Text("Your Reliability: ") + Text("Stellar")
                                         .font(.system(size: 18))
                                         .bold()
                                     Text("You've been making regular payments and keeping up with your groups. Good job!")
-                                        .font(.system(size: 14))
+                                        .font(.system(size: 12))
                                         .foregroundStyle(.gray)
                                 }
 
@@ -125,6 +125,14 @@ struct ProfileTab: View {
                 isLoading = true
                 fetchPayments()
             }
+            .navigationBarItems(trailing:
+                NavigationLink(destination: {
+                    SettingsView()
+                }, label: {
+                    Image(systemName: "gear")}
+                )
+            )
+
         }
     }
 

@@ -22,9 +22,9 @@ struct PaymentSubView: View {
                     image
                         .resizable()
                         .frame(width: 50, height: 50)
-                        .cornerRadius(8)
+                        .cornerRadius(5)
                 } placeholder: {
-                    RoundedRectangle(cornerSize: CGSize(width: 8, height: 8))
+                    RoundedRectangle(cornerSize: CGSize(width: 5, height: 5))
                         .frame(width: 50, height: 50)
                 }
                 
@@ -40,6 +40,7 @@ struct PaymentSubView: View {
                             .frame(width: 4, height: 4)
                         Text(payment.description)
                             .font(.system(size: 12))
+                            .lineLimit(1)
                     }
                 }
             } else {
