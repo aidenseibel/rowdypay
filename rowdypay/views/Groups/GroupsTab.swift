@@ -15,7 +15,8 @@ struct GroupsTab: View {
     @State private var groups: [Group] = []
     @State private var isLoading = true
     @State private var sortOption = SortOption.none
-    @State private var groupAmounts: [Int: Double] = [:] 
+    @State private var groupAmounts: [Int: Double] = [:]
+    
     enum SortOption {
         case none
         case amountHighToLow
@@ -39,8 +40,8 @@ struct GroupsTab: View {
         NavigationStack {
         
             ZStack {
-                MotionAnimatorView()  // Add this first in the ZStack
-                    .ignoresSafeArea() // Make it fill the whole screen
+                SharedViews.motionAnimator
+                    .ignoresSafeArea()
                 ScrollView{
 
                 VStack{
