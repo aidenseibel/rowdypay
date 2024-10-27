@@ -28,6 +28,7 @@ struct SettingsView: View {
                         title: Text("Confirm Sign Out"),
                         message: Text("Are you sure you want to sign out?"),
                         primaryButton: .destructive(Text("Yes")) {
+                            UserDefaults.standard.removeObject(forKey: "email")
                             viewModel.hasOnboarded = false
                         },
                         secondaryButton: .cancel()

@@ -31,9 +31,14 @@ struct ReliabilityReportView: View {
 
                 Text("From what we can tell, you make regular payments to your groups on a punctual basis. ")
                     .multilineTextAlignment(.center)
+                    .font(.system(size: 12))
+                    .foregroundColor(.gray)
                     .frame(width: screenWidth * 0.70)
                 
                 Text("Good job!")
+                    .font(.system(size: 12))
+                    .foregroundColor(.gray)
+
             }
             .padding(10)
         }
