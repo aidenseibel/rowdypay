@@ -28,6 +28,12 @@ struct Onboarding: View {
     var body: some View {
         ScrollView(showsIndicators: false){
             VStack(alignment: .leading, spacing: 30){
+                Image("icon")
+                    .resizable()
+                    .frame(width: screenWidth * 0.3, height: screenWidth * 0.3)
+                    .padding(.top, 20)
+                    .cornerRadius(10)
+                
                 Text("Welcome to RowdyPay")
                     .font(.system(size: 42))
                     .bold()
@@ -61,9 +67,10 @@ struct Onboarding: View {
                             }
                         } label: {
                             Text("Submit")
-                                .font(.system(size: 24, weight: .bold, design: .default))
-                                .padding(3)
+                                .font(.system(size: 18))
                         }
+                        .padding(.top, 20)
+
                     }
                 }
                 
@@ -101,9 +108,9 @@ struct Onboarding: View {
                             }
                         } label: {
                             Text("Submit")
-                                .font(.system(size: 24, weight: .bold, design: .default))
-                                .padding(3)
+                                .font(.system(size: 18))
                         }
+                        .padding(.top, 20)
                     }
                 }
 
