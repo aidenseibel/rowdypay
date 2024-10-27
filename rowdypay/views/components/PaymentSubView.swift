@@ -39,9 +39,6 @@ struct PaymentSubView: View {
                             .font(.system(size: 12))
                     }
                 }
-            }else{
-                ProgressView("Loading...")
-                    .frame(width:50, height:50)
             } else {
                 // Placeholder while loading
                 ProgressView("Loading...")

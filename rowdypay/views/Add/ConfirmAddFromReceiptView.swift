@@ -41,7 +41,8 @@ struct ConfirmAddFromReceiptView: View {
             Button {
                 if let group = selectedGroup {
                     let userID = viewModel.localUser.id
-                    let allOtherUsers = group.users
+//                    let allOtherUsers = group.users
+                    let allOtherUsers: [Int] = []
 
                     DataModel.updateBalances(userID: userID, userIDs: allOtherUsers, groupID: group.id, amount: price) { success in
                         

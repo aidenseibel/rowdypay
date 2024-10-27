@@ -184,8 +184,8 @@ class DataModel {
 
     //MARK: GET PAYMENTS FROM USER
     static func getPaymentsFromUser(id: Int, completion: @escaping ([Payment]) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_user_payments") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_user_payments")
+        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_payments") else {
+            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_payments")
             return
         }
                 
@@ -341,14 +341,6 @@ class DataModel {
 
                 if let httpResponse = response as? HTTPURLResponse {
                     print("Response status code:", httpResponse.statusCode)
-                    print("Error performing get_users_by_group: \(error)")
-                    return
-                }
-
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
-                    print("Server error performing get_users_by_group")
-                    return
                 }
 
                 if let data = data {
@@ -394,10 +386,6 @@ class DataModel {
         }
     }
 
-            print("Error encoding JSON while get_users_by_group")
-        }
-    }
-    
     // MARK: SUBMIT REQUEST (RETURN SUCCESS)
     static func updateBalances(userID: Int, userIDs: [Int], groupID: Int, amount: Double, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/update_balances") else {
