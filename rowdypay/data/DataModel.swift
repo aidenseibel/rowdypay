@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import OpenAI
 
 class DataModel {
 
@@ -491,7 +492,6 @@ class DataModel {
             completion(false)
         }
     }
-    
     static func createGroup(groupName: String, image: String, users:[Int],creatorID:Int, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/create_group") else {
             print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/create_group")
@@ -542,45 +542,52 @@ class DataModel {
         }
     }
     //MARK: SEND IMAGE FOR ANALYSIS
-    static func sendImageForAnalysis(image: UIImage, completion: @escaping (Bool, Double) -> Void){
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/analyze_image") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/analyze_image")
+    static func sendImageToOpenAI(image: UIImage, completion: @escaping (Bool, Double) -> Void) {
+        let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 512, height: 512))
+        
+        let api_key : String = ""
+        
+        guard let imageData = resizedImage.jpegData(compressionQuality: 0.5)?.base64EncodedString() else {
+            return
+        }
+        
+        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
             return
         }
 
-        // Convert the image to JPEG data
-        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
-            print("Failed to convert image to data")
-            return
-        }
-
-        // Create the request
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        
-        // Set the content type to multipart/form-data
-        let boundary = UUID().uuidString
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(api_key)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        // Create the multipart form data
-        var body = Data()
+        let jsonBody: [String: Any] = [
+            "model": "gpt-4o", // Specify the model you want to use
+            "messages": [
+                [
+                    "role": "user",
+                    "content": [
+                        [
+                            "type": "text",
+                            "text": "Determine if this image is a receipt. If it is a receipt, give the total charge. Output the result as a JSON object with the fields is_receipt as a bool and total_charge as a double."
+                        ],
+                        [
+                            "type": "image_url",
+                            "image_url": [
+                                "url": "data:image/jpg;base64,\(imageData)" // Use correct Swift string interpolation
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
 
-        // Append the image data to the body
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
-        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
-        body.append(imageData)
-        body.append("\r\n".data(using: .utf8)!)
-        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: jsonBody, options: [])
+        } catch {
+            return
+        }
 
-        // Set the body of the request
-        request.httpBody = body
-
-        // Create a URLSession data task
         URLSession.shared.dataTask(with: request) { data, response, error in
-            completion(true, 10.0)
-            
-            // Handle the response
             if let error = error {
                 print("Error: \(error.localizedDescription)")
                 return
@@ -590,13 +597,53 @@ class DataModel {
                 print("Response status code: \(response.statusCode)")
             }
 
-            // Optionally handle the data response if needed
             if let data = data {
-                // Process the returned data
-                if let responseString = String(data: data, encoding: .utf8) {
-                    print("Response data: \(responseString)")
+                do {
+                    let decoder = JSONDecoder()
+                    let completionResponse = try decoder.decode(ChatCompletionResponse.self, from: data)
+
+                    if let firstChoice = completionResponse.choices.first {
+                        let content = firstChoice.message.content
+                        let startIndex = content.index(content.startIndex, offsetBy: 7) // 8th character (0-based index)
+                        let endIndex = content.index(content.endIndex, offsetBy: -4) // 4th character from the end
+
+                        // Create the substring
+                        let substring = content[startIndex..<endIndex]
+                        
+                        print(substring)
+                        
+                        if let jsonData = substring.data(using: .utf8) {
+                            let receiptInfo = try decoder.decode(ReceiptInfo.self, from: jsonData)
+                            
+                            // Call the completion handler with parsed results
+                            completion(receiptInfo.isReceipt, Double(receiptInfo.totalCharge))
+                        }
+                    }
+                } catch {
+                    print("Error decoding response: \(error)")
                 }
             }
         }.resume()
+    }
+
+    static func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+
+        // Determine what ratio to use to ensure the image is scaled properly
+        let ratio = min(widthRatio, heightRatio)
+
+        // Calculate the new size
+        let newSize = CGSize(width: size.width * ratio, height: size.height * ratio)
+
+        // Resize the image
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        image.draw(in: CGRect(origin: .zero, size: newSize))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage!
     }
 }

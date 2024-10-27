@@ -89,7 +89,7 @@ struct ScanReceiptView: View {
                                 
                 if let image = image{
                     Button {
-                        DataModel.sendImageForAnalysis(image: image) { (success, price) in
+                        DataModel.sendImageToOpenAI(image: image){ (success, price) in
                             if success {
                                 // Set the price and trigger navigation
                                 self.analysisPrice = price
