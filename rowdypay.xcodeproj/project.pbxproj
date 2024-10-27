@@ -21,6 +21,7 @@
 		17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */; };
 		17CD074C2CCD785C00EE3B66 /* PaymentSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD074B2CCD785C00EE3B66 /* PaymentSubView.swift */; };
 		17CD074E2CCD7C3B00EE3B66 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD074D2CCD7C3B00EE3B66 /* Util.swift */; };
+		AD8682882CCDB3FC00336FD9 /* CreatePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8682872CCDB3FC00336FD9 /* CreatePayment.swift */; };
 		ADCA4D582CCD8987008D4CEA /* GroupsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSubView.swift; sourceTree = "<group>"; };
 		17CD074B2CCD785C00EE3B66 /* PaymentSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSubView.swift; sourceTree = "<group>"; };
 		17CD074D2CCD7C3B00EE3B66 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		AD8682872CCDB3FC00336FD9 /* CreatePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePayment.swift; sourceTree = "<group>"; };
 		ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +139,7 @@
 			children = (
 				17CD07372CCD5FED00EE3B66 /* GroupsTab.swift */,
 				ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */,
+				AD8682872CCDB3FC00336FD9 /* CreatePayment.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				17CD073E2CCD628800EE3B66 /* Group.swift in Sources */,
 				17CD073A2CCD600200EE3B66 /* ViewModel.swift in Sources */,
 				17CD07382CCD5FED00EE3B66 /* GroupsTab.swift in Sources */,
+				AD8682882CCDB3FC00336FD9 /* CreatePayment.swift in Sources */,
 				17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */,
 				17CD073C2CCD628200EE3B66 /* User.swift in Sources */,
 				17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */,

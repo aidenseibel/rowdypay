@@ -11,48 +11,53 @@ import SwiftUI
 //  else, use a random user
 
 struct GroupsTab: View {
-    @State private var groups: [Group] = [
-        Group(id: 101, name: "Test Group", image: "beautiful", users: [1,2,3,4,5,6,7]),
-        Group(id: 102, name: "Test Group 2", image: "sample_group_image", users: [1,2,3,4,5,6,7,8, 9])
-
-    ]
+    @EnvironmentObject var viewModel: ViewModel
+    @State private var groups: [Group] = []
+    @State private var isLoading = true
     
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                List {
-                    ForEach(groups) { group in
-                        NavigationLink(destination: GroupsDetail(thisgroup: group)) {
-                            HStack {
-                                Image(group.image)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 50, height: 50)
-                                    .background(Color.gray.opacity(0.2))
-                                    .clipShape(Circle())
-                                
-                                VStack(alignment: .leading, spacing: 8) { // Increased spacing
-                                    Text(group.name)
-                                        .font(.title3)  // Bigger font
-                                        .fontWeight(.semibold)
-                                    Text("\(group.users.count) members")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                }
-                                .padding(.leading, 12)  // Increased padding
-                                
-                                Spacer()
+                if isLoading{
+                    ProgressView("Loading Groups...")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity) // to center it
+
+                }else{
+                    List {
+                        ForEach(groups) { group in
+                            NavigationLink {
+                                GroupsDetail(thisgroup: group)
+                            } label: {
+                                GroupSubView(group: group)
                             }
-                            .padding(.vertical, 12)  // Added vertical padding
                         }
-                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))  // Added spacing between rows
                     }
                 }
             }
             .navigationTitle("My Groups")
         }
+        .onAppear {
+            fetchGroups()  // Fetch when view appears
+        }
+        .refreshable {
+            fetchGroups()  // Allow pull-to-refresh
+        }
     }
- }
+    
+    private func fetchGroups() {
+        let userID = viewModel.localUser.id
+        isLoading = true
+        DataModel.getGroupsFromUser(id: userID) { fetchedGroups in
+            DispatchQueue.main.async {
+                self.isLoading = false
+                self.groups = fetchedGroups
+            }
+        }
+        print(userID)
+        print(groups)
+    
+    }
+}
 
 #Preview {
     GroupsTab()

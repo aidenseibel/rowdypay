@@ -16,7 +16,7 @@ class Payment: Identifiable, Hashable, Codable {
         hasher.combine(id)
     }
     
-    var id: Int
+    var id: Int 
     var user: Int
     var group: Int
     var description: String

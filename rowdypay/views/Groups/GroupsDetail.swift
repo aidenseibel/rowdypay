@@ -8,87 +8,135 @@
 import SwiftUI
 
 struct GroupsDetail: View {
+    @EnvironmentObject var viewModel: ViewModel
     let thisgroup: Group
-    
+    var amount = 10
     @State private var users: [User] = []
     @State private var isLoading: Bool = true
     @State private var errorMessage: String? // Optional error message
-
+    
     var body: some View {
-        VStack{
-            Text(thisgroup.name)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-            Spacer()
-            HStack {
-                if isLoading {
-                    // Loading indicator
-                    ProgressView("Loading users...")
-                } else if let errorMessage = errorMessage {
-                    // Show error message
-                    Text("Error: \(errorMessage)")
-                        .foregroundColor(.red)
-                } else if users.isEmpty {
-                    // No users found
-                    Text("No users in this group.")
-                        .foregroundStyle(.gray)
-                } else {
-                    // Show first 4 users
-                    ForEach(users, id: \.self) { user in
-                        VStack {
-                            Image(user.image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 40, height: 40)
-                                .background(Color.gray.opacity(0.2))
-                                .clipShape(Circle())
-                            Text(user.username)
-                                .font(.caption)
+        VStack(spacing: 16){
+                HStack {
+                    if isLoading {
+                        // Loading indicator
+                        ProgressView("Loading users...")
+                    } else if let errorMessage = errorMessage {
+                        // Show error message
+                        Text("Error: \(errorMessage)")
+                            .foregroundColor(.red)
+                    } else if users.isEmpty {
+                        // No users found
+                        Text("No users in this group.")
+                            .foregroundStyle(.gray)
+                    } else {
+                        // Show first 4 users
+                        ForEach(users.prefix(4), id: \.self) { user in
+                            VStack {
+                                AsyncImage(url: URL(string: user.image)) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 40, height: 40)
+                                        .clipShape(Circle())
+                                } placeholder: {
+                                    Circle()
+                                        .fill(Color.gray.opacity(0.2))
+                                        .frame(width: 40, height: 40)
+                                }
+                                Text(user.username)
+                                    .font(.caption)
+                            }
+                        }
+                        // If there are more than 4 users, show the remaining count
+                        if thisgroup.users.count > 4 {
+                            VStack {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.gray.opacity(0.2))
+                                        .frame(width: 40, height: 40)
+                                    Text("+\(thisgroup.users.count - 4)")
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                }
+                                Text("More")
+                                    .font(.caption)
+                            }
                         }
                     }
                 }
-                
-                // If there are more than 4 users, show the remaining count
-                if thisgroup.users.count > 4 {
-                    VStack {
-                        ZStack {
-                            Circle()
-                                .fill(Color.gray.opacity(0.2))
-                                .frame(width: 40, height: 40)
-                            Text("+\(thisgroup.users.count - 4)")
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                        }
-                        Text("\(thisgroup.users.count - 4) More")
-                            .font(.caption)
-                    }
-                }
+                Text("\(users.count) users in this group")  // Add this temporarily for debugging
 
+                Text("You Owe:")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.secondary)
+                
+                Text("$20")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .fontDesign(.rounded)
+                    .foregroundColor(.primary)
+                    .padding(.horizontal, 32)
+                    .padding(.vertical, 16)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color(.systemBackground))
+                            .shadow(
+                                color: Color.black.opacity(0.1),
+                                radius: 10,
+                                x: 0,
+                                y: 5
+                            )
+                    )
+                if amount > 0 {
+                    NavigationLink {
+                        CreatePayment()
+                    } label: {
+                        HStack {
+                            Text("Make Payment")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                            Image(systemName: "arrow.right")
+                        }
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.accent)
+                                .shadow(
+                                    color: Color.accent.opacity(0.3),
+                                    radius: 8,
+                                    x: 0,
+                                    y: 4
+                                )
+                        )
+                        .padding(.horizontal, 24)
+                        .padding(.top, 8)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
             }
-            Spacer()
-            Text("You Owe")
-            Text("$20")
-            
+        .toolbar(.hidden, for: .tabBar)
+        .navigationTitle(thisgroup.name)
+        .onAppear {
+            fetchUsers()
         }
     }
     
     private func fetchUsers() {
         let groupID = thisgroup.id
+        print("Group \(thisgroup.name) has \(thisgroup.users.count) users")
         
-        DataModel.getUsersFromGroup(id: groupID){ users in
-            DispatchQueue.main.async {
-                if users.isEmpty {
-                    self.users = []
-                    self.errorMessage = nil
-                } else {
-                    self.users = users
-                    self.errorMessage = nil
-                }
-                self.isLoading = false
-            }
+        // Use the users array that's already in the group
+        self.users = thisgroup.users
+        self.isLoading = false
+        
         }
-    }
+//    private func fetchBalance(){
+//        let groupID = thisgroup.id
+//        let userID = viewModel.localUser.id
+//    }
 }
 

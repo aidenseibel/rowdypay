@@ -20,7 +20,7 @@ class User: Identifiable, Hashable, Codable {
     var username: String
     var email: String
     var image: String
-    var groups: [Int]
+    var groups: [Group]
     var payments: [Int]
     var dateJoined: Date
     
@@ -60,19 +60,12 @@ class User: Identifiable, Hashable, Codable {
         self.username = try container.decode(String.self, forKey: .username)
         self.email = try container.decode(String.self, forKey: .email)
         self.image = try container.decode(String.self, forKey: .image)
-        self.groups = try container.decode([Int].self, forKey: .groups)
+        self.groups = try container.decode([Group].self, forKey: .groups)
         self.payments = try container.decode([Int].self, forKey: .payments)
+
         
-        // Decode the dateJoined with a custom date format if necessary
-        let dateString = try container.decode(String.self, forKey: .dateJoined)
-        
-        // Assuming the date string is in a specific format, for example: "YYYY-MM-DDTHH:mm:ssZ"
-        let dateFormatter = ISO8601DateFormatter()
-        if let date = dateFormatter.date(from: dateString) {
-            self.dateJoined = date
-        } else {
-            // Handle the case where the date is not in the expected format
-            throw DecodingError.dataCorruptedError(forKey: .dateJoined, in: container, debugDescription: "Invalid date format")
-        }
+        // Handle timestamp as Int
+        let timestamp = try container.decode(Int.self, forKey: .dateJoined)
+        dateJoined = Date(timeIntervalSince1970: TimeInterval(timestamp))
     }
 }
