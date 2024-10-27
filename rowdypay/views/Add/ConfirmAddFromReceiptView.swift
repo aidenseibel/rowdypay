@@ -13,8 +13,8 @@ struct ConfirmAddFromReceiptView: View {
 
     var price: Double
     @State var selectedGroup: Group?
+    @State private var showSuccessAlert = false // State variable for controlling the alert
 
-    
     var screenWidth = UIScreen.main.bounds.width
     
     var body: some View {
@@ -33,7 +33,6 @@ struct ConfirmAddFromReceiptView: View {
                 Spacer()
             }
             
-            
             NavigationLink {
                 SelectGroupView(selectedGroup: $selectedGroup) // Pass the binding here
             } label: {
@@ -51,7 +50,7 @@ struct ConfirmAddFromReceiptView: View {
                         
                         if success {
                             DispatchQueue.main.async {
-                                navigationPath.removeLast()
+                                showSuccessAlert = true // Show alert on success
                             }
                         }
                     }
@@ -71,6 +70,9 @@ struct ConfirmAddFromReceiptView: View {
         }
         .padding(10)
         .navigationTitle("Confirm request")
+        .alert(isPresented: $showSuccessAlert) { // Alert modifier
+            Alert(title: Text("Success"), message: Text("The transaction was successful."), dismissButton: .default(Text("OK")))
+        }
     }
 }
 
