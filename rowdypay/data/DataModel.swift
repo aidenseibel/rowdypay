@@ -393,7 +393,62 @@ class DataModel {
             print("Request creation error:", error)
         }
     }
-
+    static func getBalances(userID: Int, groupID: Int, completion: @escaping (Result<Double, Error>) -> Void) {
+        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_balance") else {
+            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_balance")
+            completion(.failure(URLError(.badURL)))
+            return
+        }
+                
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let parameters: [String: Any] = [
+            "user_id": userID,
+            "group_id": groupID
+        ]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+        } catch {
+            completion(.failure(error))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+                return
+            }
+            
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(.failure(URLError(.zeroByteResource)))
+                }
+                return
+            }
+            
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let balance = json["balance"] as? Double {
+                    DispatchQueue.main.async {
+                        completion(.success(balance))
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(.failure(URLError(.cannotParseResponse)))
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }.resume()
+    }
     // MARK: SUBMIT REQUEST (RETURN SUCCESS)
     static func updateBalances(userID: Int, userIDs: [Int], groupID: Int, amount: Double, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/update_balances") else {

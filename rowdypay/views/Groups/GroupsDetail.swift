@@ -13,7 +13,7 @@ struct GroupsDetail: View {
     @State private var users: [User] = []
     @State private var isLoading: Bool = true
     @State private var errorMessage: String? // Optional error message
-    
+    @State private var amount:Double
     var body: some View {
         VStack(spacing: 16){
                 HStack {
@@ -88,7 +88,6 @@ struct GroupsDetail: View {
                                 y: 5
                             )
                     )
-            let amount = 20.0
                 if amount > 0 {
                     NavigationLink {
                         MakePayment(mygroup: thisgroup, amount: amount)
@@ -123,9 +122,9 @@ struct GroupsDetail: View {
             fetchUsers()
             viewModel.isTabBarShowing = false
         }
-        .onDisappear(){
-            viewModel.isTabBarShowing = true
-        }
+//        .onDisappear(){
+//            viewModel.isTabBarShowing = false
+//        }
     }
     
     private func fetchUsers() {
@@ -153,10 +152,19 @@ struct GroupsDetail: View {
             self.isLoading = false
         }
     }
+    public func fetchBalance(groupID: Int) {
+        let groupID = groupID
+        let userID = viewModel.localUser.id
+        DataModel.getBalances(userID: userID, groupID: groupID) { result in
+            switch result {
+            case .success(let balance):
+                self.amount = balance
+            case .failure(let error):
+                print("Error fetching balance: \(error)")
+            }
+        }
+    }
 }
-//    private func fetchBalance(){
-//        let groupID = thisgroup.id
-//        let userID = viewModel.localUser.id
-//    }
+
 
 
