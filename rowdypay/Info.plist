@@ -13,9 +13,5 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>In order to scan receipts</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>In order to scan receipts</string>
 </dict>
 </plist>

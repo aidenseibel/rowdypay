@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct AddTab: View {
-    @EnvironmentObject var viewModel: ViewModel
-    @State var navigationPath = NavigationPath()
-
+//    @EnvironmentObject var viewModel: ViewModel
+    
     var screenWidth = UIScreen.main.bounds.width
 
     var body: some View {
@@ -18,60 +17,49 @@ struct AddTab: View {
             ScrollView{
                 VStack(alignment: .leading, spacing: 40){
                     Text("How would you like to add a budget request?")
-                    
-                    NavigationLink {
-                        AddManuallyView()
-                    } label: {
-                        HStack(spacing: 15){
-                            Image("sample_profile_image")
-                                .resizable()
-                                .frame(width: screenWidth * 0.25, height: screenWidth * 0.25)
-                                .cornerRadius(10)
-                                
-
-                            VStack(alignment: .leading, spacing: 10){
-                                Text("Add manually")
-                                    .font(.system(size: 22))
-                                    .bold()
-                                Text("Enter the details manually")
-                                    .font(.system(size: 14))
-                            }
-                            Spacer()
-                        }
-                        .padding()
-                        .overlay(
-                            RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
-                                .stroke(Color.white, lineWidth: 1)
-                        )
-                    }
-                    .buttonStyle(.plain)
-                    
-                    NavigationLink {
-                        ScanReceiptView(navigationPath: $navigationPath)
-                    } label: {
-                        HStack(spacing: 15){
-                            Image("sample_profile_image")
-                                .resizable()
-                                .frame(width: screenWidth * 0.25, height: screenWidth * 0.25)
-                                .cornerRadius(10)
+                    HStack(spacing: 15){
+                        Image("sample_profile_image")
+                            .resizable()
+                            .frame(width: screenWidth * 0.25, height: screenWidth * 0.25)
+                            .cornerRadius(10)
                             
-                            VStack(alignment: .leading, spacing: 10){
-                                Text("Scan a receipt")
-                                    .font(.system(size: 22))
-                                    .bold()
-                                Text("Use our tool to read in details automatically")
-                                    .font(.system(size: 14))
-                            }
-                            Spacer()
-                        }
-                        .padding()
-                        .overlay(
-                            RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
-                                .stroke(Color.white, lineWidth: 1)
-                        )
-                    }
-                    .buttonStyle(.plain)
 
+                        VStack(alignment: .leading, spacing: 10){
+                            Text("Add manually")
+                                .font(.system(size: 22))
+                                .bold()
+                            Text("Enter the details manually")
+                                .font(.system(size: 14))
+                        }
+                        Spacer()
+                    }
+                    .padding()
+                    .overlay(
+                        RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
+                            .stroke(Color.white, lineWidth: 1)
+                    )
+
+                    
+                    HStack(spacing: 15){
+                        Image("sample_profile_image")
+                            .resizable()
+                            .frame(width: screenWidth * 0.25, height: screenWidth * 0.25)
+                            .cornerRadius(10)
+
+                        VStack(alignment: .leading, spacing: 10){
+                            Text("Scan a receipt")
+                                .font(.system(size: 22))
+                                .bold()
+                            Text("Use our tool to read in details automatically")
+                                .font(.system(size: 14))
+                        }
+                        Spacer()
+                    }
+                    .padding()
+                    .overlay(
+                        RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
+                            .stroke(Color.white, lineWidth: 1)
+                    )
                 }
                 .padding(10)
             }

@@ -42,21 +42,12 @@ struct PaymentSubView: View {
             }else{
                 ProgressView("Loading...")
                     .frame(width:50, height:50)
-            } else {
-                // Placeholder while loading
-                ProgressView("Loading...")
-                    .frame(width: 50, height: 50)
             }
             Spacer()
         }
-
         .padding(8)
         .overlay(RoundedRectangle(cornerRadius: 10).stroke(.white, lineWidth: 1))
-        .onAppear {
-            DataModel.getGroup(id: payment.group) { fetchedGroup in
-                self.group = fetchedGroup
-            }
-        }
+
     }
 }
 
