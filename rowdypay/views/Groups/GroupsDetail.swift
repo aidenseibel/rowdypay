@@ -13,7 +13,7 @@ struct GroupsDetail: View {
     @State private var users: [User] = []
     @State private var isLoading: Bool = true
     @State private var errorMessage: String? // Optional error message
-    @State private var amount:Double
+    @State private var amount: Double = 2
     var body: some View {
         VStack(spacing: 16){
                 HStack {
@@ -71,7 +71,7 @@ struct GroupsDetail: View {
                     .fontWeight(.semibold)
                     .foregroundColor(.secondary)
                 
-                Text("$20")
+                Text("$\(amount, specifier: "%.2f")")
                     .font(.title)
                     .fontWeight(.bold)
                     .fontDesign(.rounded)
@@ -121,6 +121,7 @@ struct GroupsDetail: View {
         .onAppear {
             fetchUsers()
             viewModel.isTabBarShowing = false
+            fetchBalance(groupID: thisgroup.id)
         }
 //        .onDisappear(){
 //            viewModel.isTabBarShowing = false
