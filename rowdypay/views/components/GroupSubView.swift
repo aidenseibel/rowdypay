@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct GroupSubView: View {
     var group: Group
@@ -25,6 +26,7 @@ struct GroupSubView: View {
                 RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
                     .fill(Color.gray.opacity(0.2))
                     .frame(width: screenWidth * 0.3, height: screenWidth * 0.3)
+                    .shimmering()
             }
             
             VStack(alignment: .leading, spacing: 6) {
