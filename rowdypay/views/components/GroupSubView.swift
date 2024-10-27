@@ -94,7 +94,7 @@ struct GroupSubView: View {
 
             Spacer()
         }
-        .padding(10)
+        .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
         .background(Color(.darkerGray))
         .cornerRadius(10)
         .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))

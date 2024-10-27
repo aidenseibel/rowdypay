@@ -11,6 +11,7 @@
 		171D51FA2CCE13F000F3EBA1 /* ChangeAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D51F92CCE13F000F3EBA1 /* ChangeAvatarView.swift */; };
 		171D51FD2CCE1AD000F3EBA1 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 171D51FC2CCE1AD000F3EBA1 /* OpenAI */; };
 		171D51FF2CCE247000F3EBA1 /* OpenAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D51FE2CCE247000F3EBA1 /* OpenAI.swift */; };
+		1721DFF82CCE7F0B006624D9 /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721DFF72CCE7F0B006624D9 /* UserAvatarView.swift */; };
 		17C3165F2CCDFA39003550B5 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C3165E2CCDFA39003550B5 /* Onboarding.swift */; };
 		17C316612CCDFDD5003550B5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C316602CCDFDD5003550B5 /* SettingsView.swift */; };
 		17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07222CCD5F9100EE3B66 /* rowdypayApp.swift */; };
@@ -43,6 +44,7 @@
 		1711C5CE2CCDE6C30061C334 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		171D51F92CCE13F000F3EBA1 /* ChangeAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAvatarView.swift; sourceTree = "<group>"; };
 		171D51FE2CCE247000F3EBA1 /* OpenAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAI.swift; sourceTree = "<group>"; };
+		1721DFF72CCE7F0B006624D9 /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
 		17C3165E2CCDFA39003550B5 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		17C316602CCDFDD5003550B5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		17CD071F2CCD5F9100EE3B66 /* rowdypay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rowdypay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				17CD07322CCD5FD300EE3B66 /* ProfileTab.swift */,
+				1721DFF72CCE7F0B006624D9 /* UserAvatarView.swift */,
 				17FD4ED52CCE3C8C00D7A4E7 /* ReliabilityReportView.swift */,
 				171D51F92CCE13F000F3EBA1 /* ChangeAvatarView.swift */,
 				17C316602CCDFDD5003550B5 /* SettingsView.swift */,
@@ -286,6 +289,7 @@
 				17C3165F2CCDFA39003550B5 /* Onboarding.swift in Sources */,
 				1711C5CF2CCDE6C30061C334 /* TabBar.swift in Sources */,
 				17CD073E2CCD628800EE3B66 /* Group.swift in Sources */,
+				1721DFF82CCE7F0B006624D9 /* UserAvatarView.swift in Sources */,
 				17CD073A2CCD600200EE3B66 /* ViewModel.swift in Sources */,
 				17CD07382CCD5FED00EE3B66 /* GroupsTab.swift in Sources */,
 				17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */,

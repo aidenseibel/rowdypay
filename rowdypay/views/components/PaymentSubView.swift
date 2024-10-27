@@ -27,19 +27,39 @@ struct PaymentSubView: View {
     var body: some View {
         HStack(alignment: .center, spacing: 10){
             if let group = group {
-                AsyncImage(url: URL(string: group.image)) { image in
-                    image
+                if let url = URL(string: group.image), UIApplication.shared.canOpenURL(url) {
+                    // If it's a URL, load asynchronously
+                    AsyncImage(url: url) { phase in
+                        switch phase {
+                        case .empty:
+                            RoundedRectangle(cornerSize: CGSize(width: 5, height: 5))
+                                .frame(width: 50, height: 50)
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                                .cornerRadius(5)
+                        case .failure:
+                            Image(systemName: "photo") // Placeholder for failed load
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                                .cornerRadius(5)
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                } else {
+                    // Otherwise, assume it's a local asset
+                    Image(group.image)
                         .resizable()
+                        .scaledToFill()
                         .frame(width: 50, height: 50)
                         .cornerRadius(5)
-                } placeholder: {
-                    RoundedRectangle(cornerSize: CGSize(width: 5, height: 5))
-                        .frame(width: 50, height: 50)
                 }
                 
                 VStack(alignment: .leading, spacing: 7){
-                    
-                    
                     if showsUser{
                         if let user = user{
                             Text("$" + String(format: "%.2f", payment.amount) + " from \(user.username)")

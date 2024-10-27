@@ -33,30 +33,7 @@ struct ProfileTab: View {
                             Button {
                                 openChangeAvatar = true
                             } label: {
-                                ZStack{
-                                    Circle()
-                                        .frame(width: screenWidth * 0.50, height: screenWidth * 0.50)
-                                        .cornerRadius(screenWidth * 0.35)
-                                        .opacity(0.05)
-                                        .padding()
-
-                                    Image(viewModel.localUser.image)
-                                        .resizable()
-                                        .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
-                                        .cornerRadius(screenWidth * 0.35)
-                                        .padding()
-                                        .overlay(
-                                            Circle()
-                                                .stroke(Color.gray, lineWidth: 1)
-                                        )
-
-                                    Circle()
-                                        .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
-                                        .cornerRadius(screenWidth * 0.35)
-                                        .padding()
-                                        .opacity(0.10)
-                                        .shimmering()
-                                }
+                                UserAvatarView(imageString: viewModel.localUser.image)
                             }
                             .buttonStyle(.plain)
                             
