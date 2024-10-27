@@ -25,6 +25,7 @@
 		17DA9C532CCDAB1200F54F8B /* SelectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DA9C522CCDAB1200F54F8B /* SelectGroupView.swift */; };
 		17DA9C552CCDBA0000F54F8B /* ScanReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DA9C542CCDBA0000F54F8B /* ScanReceiptView.swift */; };
 		17DA9C592CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DA9C582CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift */; };
+		17DA9C5C2CCDD7C400F54F8B /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 17DA9C5B2CCDD7C400F54F8B /* Shimmer */; };
 		AD8682882CCDB3FC00336FD9 /* CreatePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8682872CCDB3FC00336FD9 /* CreatePayment.swift */; };
 		ADCA4D582CCD8987008D4CEA /* GroupsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17DA9C5C2CCDD7C400F54F8B /* Shimmer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +183,9 @@
 			dependencies = (
 			);
 			name = rowdypay;
+			packageProductDependencies = (
+				17DA9C5B2CCDD7C400F54F8B /* Shimmer */,
+			);
 			productName = rowdypay;
 			productReference = 17CD071F2CCD5F9100EE3B66 /* rowdypay.app */;
 			productType = "com.apple.product-type.application";
@@ -209,6 +214,9 @@
 				Base,
 			);
 			mainGroup = 17CD07162CCD5F9100EE3B66;
+			packageReferences = (
+				17DA9C5A2CCDD7C400F54F8B /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+			);
 			productRefGroup = 17CD07202CCD5F9100EE3B66 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -460,6 +468,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		17DA9C5A2CCDD7C400F54F8B /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		17DA9C5B2CCDD7C400F54F8B /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17DA9C5A2CCDD7C400F54F8B /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 17CD07172CCD5F9100EE3B66 /* Project object */;
 }

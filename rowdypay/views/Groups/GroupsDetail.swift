@@ -130,7 +130,7 @@ struct GroupsDetail: View {
         print("Group \(thisgroup.name) has \(thisgroup.users.count) users")
         
         // Use the users array that's already in the group
-        self.users = thisgroup.users
+        self.users = []
         self.isLoading = false
         
         }

@@ -80,7 +80,10 @@ class DataModel {
                         let group = try decoder.decode(Group.self, from: data)
                         completion(group)
                     } catch {
-                        print("Something went wrong with JSON parsing: \(error)")
+                        print("Something went wrong with JSON parsing group: \(error)")
+                        if let responseString = String(data: data, encoding: .utf8){
+                            print(responseString)
+                        }
                     }
                 }
             }
@@ -126,7 +129,7 @@ class DataModel {
                         let user = try decoder.decode(User.self, from: data)
                         completion(user)
                     } catch {
-                        print("Something went wrong with JSON parsing: \(error)")
+                        print("Something went wrong with JSON parsing user: \(error)")
                     }
                 }
             }
@@ -172,7 +175,7 @@ class DataModel {
                         let payment = try decoder.decode(Payment.self, from: data)
                         completion(payment)
                     } catch {
-                        print("Something went wrong with JSON parsing: \(error)")
+                        print("Something went wrong with JSON parsing payment: \(error)")
                     }
                 }
             }
@@ -184,8 +187,8 @@ class DataModel {
 
     //MARK: GET PAYMENTS FROM USER
     static func getPaymentsFromUser(id: Int, completion: @escaping ([Payment]) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_payments") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_payments")
+        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_user_payments") else {
+            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_user_payments")
             return
         }
                 
@@ -205,6 +208,7 @@ class DataModel {
                     return
                 }
 
+                print(response)
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {
                     print("Server error performing get_payments")
@@ -237,7 +241,7 @@ class DataModel {
                             print("Failed parsing JSON as array of dictionaries")
                         }
                     } catch {
-                        print("Something went wrong with JSON parsing: \(error)")
+                        print("Something went wrong with JSON parsing payments from user: \(error)")
                     }
                 }
             }

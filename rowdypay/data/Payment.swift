@@ -30,7 +30,7 @@ class Payment: Identifiable, Hashable, Codable {
         case group = "group_id"
         case description = "description"
         case amount = "amt"
-        case date = "date_made"
+        case date = "date_created"
     }
 
     // for decoding dates

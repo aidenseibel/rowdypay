@@ -26,10 +26,10 @@ class User: Identifiable, Hashable, Codable {
     
     // for json decoding
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case id = "user_id"
         case username = "display_name"
         case email = "email"
-        case image = "image"
+        case image = "img"
         case groups = "groups"
         case payments = "payments"
         case dateJoined = "date_created"
