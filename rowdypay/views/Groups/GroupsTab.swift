@@ -21,36 +21,38 @@ struct GroupsTab: View {
                 if isLoading {
                     ProgressView("Loading Groups...")
                 } else {
-                    VStack(spacing: 0) {
-                        List {
+                    ScrollView{
+                        VStack(alignment: .leading, spacing: 20) {
                             ForEach(groups) { group in
                                 NavigationLink {
                                     GroupsDetail(thisgroup: group)
                                 } label: {
                                     GroupSubView(group: group)
                                 }
+                                .buttonStyle(.plain)
                             }
-                        }
-                        
-                        NavigationLink {
-                            CreateGroup()
-                        } label: {
-                            HStack {
-                                Spacer()
-                                Text("Create Groups")
-                                    .fontWeight(.semibold)
-                                    .font(.headline)
-                                    .foregroundColor(.accent)
-                                Image(systemName: "plus.circle")
-                                    .fontWeight(.semibold)
-                                    .font(.headline)
-                                    .foregroundColor(.accent)
+                            
+                            NavigationLink {
+                                CreateGroup()
+                            } label: {
+                                HStack {
+                                    Image(systemName: "plus.circle")
+                                        .fontWeight(.semibold)
+                                        .font(.headline)
+                                        .foregroundColor(.accent)
+
+                                    Text("Create a Group")
+                                        .fontWeight(.semibold)
+                                        .font(.headline)
+                                        .foregroundColor(.accent)
+                                }
+                                .background(Color(UIColor.systemBackground))
                             }
-                            .frame(maxWidth: .infinity, minHeight: 50)
-                            .background(Color(UIColor.systemBackground))
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 10)
                         }
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 10)
+                        .padding(10)
+                        .padding(.bottom, 50)
                     }
                 }
             }

@@ -28,11 +28,6 @@ struct Onboarding: View {
     var body: some View {
         ScrollView(showsIndicators: false){
             VStack(alignment: .leading, spacing: 30){
-                Image("icon")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
-                    .cornerRadius(20)
                 Text("Welcome to RowdyPay")
                     .font(.system(size: 42))
                     .bold()

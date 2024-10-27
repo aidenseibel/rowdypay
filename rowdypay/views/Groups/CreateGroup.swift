@@ -21,51 +21,65 @@ struct CreateGroup: View {
     @State private var showGroupAlert: Bool = false
     @State private var isSearching = false
     @State private var openChangeAvatar: Bool = false
+    
+    let screenWidth = UIScreen.main.bounds.width
 
     var body: some View {
         ScrollView{
-            VStack{
+            VStack(alignment: .leading, spacing: 40){
+                Button {
+                    openChangeAvatar = true
+                } label: {
+                    HStack{
+                        Spacer()
+                        ZStack {
+                            RoundedRectangle(cornerRadius: screenWidth * 0.30)
+                                .fill(Color(.darkerGray))
+                                .frame(width: screenWidth * 0.60, height: screenWidth * 0.60)
+                            
+                            if imgStr == "" {
+                                Text("Tap to Select an Image")
+                                    .foregroundColor(.gray)
+                            } else {
+                                Image(imgStr)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: screenWidth * 0.60, height: screenWidth * 0.60)
+                                    .clipShape(RoundedRectangle(cornerRadius: screenWidth * 0.30))
+                            }
+                        }
+                        Spacer()
+                    }
+                }
+
                 TextField("Enter Group Name", text: $name)
+                    .font(.system(size: 28))
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color(.systemGray6))
                     )
-                Spacer()
-                Button {
-                    openChangeAvatar = true
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(.darkGray))
-                            .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.width * 0.45)
-                        
-                        if imgStr == "" {
-                            Text("Select an Image")
-                                .foregroundColor(.white)
-                        } else {
-                            Image(imgStr)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: UIScreen.main.bounds.width * 0.45, height: UIScreen.main.bounds.width * 0.45)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                        }
-                    }
-                }
-                Spacer()
-                HStack {
-                    TextField("Enter User ID", text: $searchUserID)
-                        .keyboardType(.numberPad)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color(.systemGray6))
-                        )
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Add Users")
+                        .font(.system(size: 24))
+                        .bold()
                     
-                    Button("Add User") {
-                        searchUser()
+                    
+                    HStack {
+                        TextField("Enter User ID", text: $searchUserID)
+                            .keyboardType(.numberPad)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color(.systemGray6))
+                            )
+                        
+                        Button("Add User") {
+                            searchUser()
+                        }
+                        .disabled(searchUserID.isEmpty || isSearching)
                     }
-                    .disabled(searchUserID.isEmpty || isSearching)
                 }
                 
                 // Display added users
@@ -89,37 +103,29 @@ struct CreateGroup: View {
                             }
                         }
                     }
-                    .padding(.horizontal)
                 }
                 
                 Spacer()
                 Button(action: {
                     createGroup()
                 }) {
-                    Text("Create Group")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(.accent)
-                                .shadow(
-                                    color: Color.accent.opacity(0.3),
-                                    radius: 8,
-                                    x: 0,
-                                    y: 4
-                                )
-                        )
+                    HStack {
+                        Spacer()
+                        Text("Create Group")
+                        Spacer()
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(.orange)
+                    .cornerRadius(10)
+                    .padding()
                 }
-                .padding(.horizontal)
             }
+            .padding()
         }
         .onTapGesture {
             self.endTextEditing()
         }
-        .ignoresSafeArea(.all)
         .onAppear(){
             viewModel.isTabBarShowing = false
         }
@@ -130,7 +136,6 @@ struct CreateGroup: View {
             viewModel.isTabBarShowing = false
         }
         .navigationTitle("Create New Group")
-        .padding()
         .alert("User Not Found or User Already Added", isPresented: $showUserAlert) {
             Button("OK", role: .cancel) {
                 showUserAlert = false
