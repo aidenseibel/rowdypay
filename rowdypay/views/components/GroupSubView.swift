@@ -16,14 +16,13 @@ struct GroupSubView: View {
     
     @State var numUsers: Int = 0
     @State var users: [User] = []
-    @State var balance: Double = 0
-
+    @State private var amount: Double = 2.0
     var body: some View {
         HStack {
             Image(group.image)
                 .resizable()
                 .scaledToFill()
-                .frame(width: screenWidth * 0.25, height: screenWidth * 0.25)
+                .frame(width: screenWidth * 0.3, height: screenWidth * 0.3)
                 .cornerRadius(10)
 
             VStack(alignment: .leading, spacing: 6) {
@@ -54,6 +53,7 @@ struct GroupSubView: View {
                         
                     }
                 }
+                Text("Amount Owe: $\(amount, specifier: "%.2f")")
             }
             .padding(.leading, 8)
 
@@ -65,7 +65,7 @@ struct GroupSubView: View {
         .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
         .onAppear {
             fetchUsers()
-            fetchBalance()
+            fetchBalance(groupID:group.id)
         }
     }
     
@@ -75,19 +75,19 @@ struct GroupSubView: View {
             self.numUsers = users.count
         }
     }
-
-    func fetchBalance() {
-        let groupID = group.id
+    private func fetchBalance(groupID: Int) {
+        let groupID = groupID
         let userID = viewModel.localUser.id
         DataModel.getBalances(userID: userID, groupID: groupID) { result in
             switch result {
             case .success(let balance):
-                self.balance = balance
+                self.amount = balance
             case .failure(let error):
                 print("Error fetching balance: \(error)")
             }
         }
     }
+
 }
 
 #Preview {

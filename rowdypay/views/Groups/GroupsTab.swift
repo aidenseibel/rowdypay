@@ -14,7 +14,6 @@ struct GroupsTab: View {
     @EnvironmentObject var viewModel: ViewModel
     @State private var groups: [Group] = []
     @State private var isLoading = true
-    
     var body: some View {
         NavigationStack {
             ZStack {
