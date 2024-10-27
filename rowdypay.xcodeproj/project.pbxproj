@@ -40,6 +40,7 @@
 		AD8682922CCE827400336FD9 /* MotionAnimatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8682912CCE827400336FD9 /* MotionAnimatorView.swift */; };
 		AD8682982CCE8C8700336FD9 /* DotsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8682972CCE8C8700336FD9 /* DotsCircleView.swift */; };
 		AD86829A2CCE8E4300336FD9 /* CirclesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8682992CCE8E4300336FD9 /* CirclesView.swift */; };
+		AD8682A02CCEA37600336FD9 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD86829F2CCEA37600336FD9 /* TimerView.swift */; };
 		ADCA4D582CCD8987008D4CEA /* GroupsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		AD8682912CCE827400336FD9 /* MotionAnimatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionAnimatorView.swift; sourceTree = "<group>"; };
 		AD8682972CCE8C8700336FD9 /* DotsCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsCircleView.swift; sourceTree = "<group>"; };
 		AD8682992CCE8E4300336FD9 /* CirclesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesView.swift; sourceTree = "<group>"; };
+		AD86829F2CCEA37600336FD9 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +198,7 @@
 				AD86828B2CCDF6AB00336FD9 /* CreateGroup.swift */,
 				ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */,
 				AD8682892CCDE62400336FD9 /* MakePayment.swift */,
+				AD86829F2CCEA37600336FD9 /* TimerView.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				17DA9C552CCDBA0000F54F8B /* ScanReceiptView.swift in Sources */,
 				171D51FA2CCE13F000F3EBA1 /* ChangeAvatarView.swift in Sources */,
 				17CD07402CCD628F00EE3B66 /* Payment.swift in Sources */,
+				AD8682A02CCEA37600336FD9 /* TimerView.swift in Sources */,
 				17CD07362CCD5FE500EE3B66 /* AddTab.swift in Sources */,
 				17CD07422CCD644D00EE3B66 /* DataModel.swift in Sources */,
 				AD8682922CCE827400336FD9 /* MotionAnimatorView.swift in Sources */,
