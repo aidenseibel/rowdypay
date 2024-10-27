@@ -560,7 +560,7 @@ class DataModel {
             print("Error encoding JSON while update_balances.")
         }
     }
-    static func leaveGroup(userID:Int, groupID:Int, completion: @escaping(Bool) ->Void){
+    static func leavingGroup(userID:Int, groupID:Int, completion: @escaping(Bool) ->Void){
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/leave_group") else {
             print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/leave_group")
             completion(false)

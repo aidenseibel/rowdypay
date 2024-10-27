@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct GroupsDetail: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: ViewModel
     let thisgroup: Group
     @State private var users: [User] = []
     @State private var isLoading: Bool = true
     @State private var errorMessage: String? // Optional error message
     @State private var amount: Double = 2
-    
+    @State private var leaveSuccess: Bool = false
+    @State private var showAlert: Bool = false
+
     @State private var payments: [Payment] = []
     
     let screenWidth = UIScreen.main.bounds.width
@@ -127,9 +130,46 @@ struct GroupsDetail: View {
                         }
                     }
                 }
+                if amount == 0.0{
+                    Button(action: {
+                        leaveGroup()
+                    }) {
+                        HStack{
+                            Text("Leave Group")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding()
+                            Image(systemName: "pip.exit")
+                                .font(.title3)
+                                .foregroundStyle(.white)
+                                .background(.clear)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .background(RoundedRectangle(cornerRadius: 20)
+                            .fill(.red)
+                            .shadow(
+                            color: Color.red.opacity(0.3),
+                            radius: 8,
+                            x: 4,
+                            y: 8
+                            )
+                        )
+
+                    }
+                }
             }
             .padding()
             .navigationTitle(thisgroup.name)
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text(leaveSuccess ? "Leave Successful" : "Leave Error"),
+                    message: Text(leaveSuccess ? "Your Departure was successful." : "There was an error with your departure."),
+                    dismissButton: .default(Text("OK")) {
+                        dismiss()
+                    }
+                )
+            }
             .onAppear {
                 fetchUsers()
                 fetchBalance(groupID: thisgroup.id)
@@ -196,6 +236,17 @@ struct GroupsDetail: View {
                 self.isLoading = false
             }
         }
+    }
+    
+    private func leaveGroup() {
+        let userID = viewModel.localUser.id
+        let groupID = thisgroup.id
+        DataModel.leavingGroup(userID: userID, groupID: groupID){
+            success in
+            leaveSuccess = success
+            showAlert = true
+        }
+
     }
 }
 
