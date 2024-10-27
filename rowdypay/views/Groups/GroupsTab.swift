@@ -17,30 +17,51 @@ struct GroupsTab: View {
     
     var body: some View {
         NavigationStack {
-            GeometryReader { geometry in
-                if isLoading{
+            ZStack {
+                if isLoading {
                     ProgressView("Loading Groups...")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity) // to center it
-
-                }else{
-                    List {
-                        ForEach(groups) { group in
-                            NavigationLink {
-                                GroupsDetail(thisgroup: group)
-                            } label: {
-                                GroupSubView(group: group)
+                } else {
+                    VStack(spacing: 0) {
+                        List {
+                            ForEach(groups) { group in
+                                NavigationLink {
+                                    GroupsDetail(thisgroup: group)
+                                } label: {
+                                    GroupSubView(group: group)
+                                }
                             }
                         }
+                        
+                        // Create Group button at bottom
+                        NavigationLink {
+                            CreateGroup()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Create Groups")
+                                    .fontWeight(.semibold)
+                                    .font(.headline)
+                                    .foregroundColor(.accent)
+                                Image(systemName: "plus.circle")
+                                    .fontWeight(.semibold)
+                                    .font(.headline)
+                                    .foregroundColor(.accent)
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(Color(UIColor.systemBackground))
+                        }
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 10)
                     }
                 }
             }
             .navigationTitle("My Groups")
         }
         .onAppear {
-            fetchGroups()  // Fetch when view appears
+            fetchGroups()
         }
         .refreshable {
-            fetchGroups()  // Allow pull-to-refresh
+            fetchGroups()
         }
     }
     
@@ -53,11 +74,8 @@ struct GroupsTab: View {
                 self.groups = fetchedGroups
             }
         }
-
-    
     }
 }
-
 #Preview {
     GroupsTab()
 }

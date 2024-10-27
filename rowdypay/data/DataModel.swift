@@ -67,7 +67,6 @@ class DataModel {
                     return
                 }
                 
-                print(response ?? "no response")
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {
                     print("Server error performing get_group")
