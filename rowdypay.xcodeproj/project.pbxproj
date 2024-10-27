@@ -21,6 +21,10 @@
 		17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */; };
 		17CD074C2CCD785C00EE3B66 /* PaymentSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD074B2CCD785C00EE3B66 /* PaymentSubView.swift */; };
 		17CD074E2CCD7C3B00EE3B66 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD074D2CCD7C3B00EE3B66 /* Util.swift */; };
+		17DA9C502CCDA4E100F54F8B /* AddManuallyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DA9C4F2CCDA4E100F54F8B /* AddManuallyView.swift */; };
+		17DA9C532CCDAB1200F54F8B /* SelectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DA9C522CCDAB1200F54F8B /* SelectGroupView.swift */; };
+		17DA9C552CCDBA0000F54F8B /* ScanReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DA9C542CCDBA0000F54F8B /* ScanReceiptView.swift */; };
+		17DA9C592CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DA9C582CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift */; };
 		ADCA4D582CCD8987008D4CEA /* GroupsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +45,10 @@
 		17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSubView.swift; sourceTree = "<group>"; };
 		17CD074B2CCD785C00EE3B66 /* PaymentSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSubView.swift; sourceTree = "<group>"; };
 		17CD074D2CCD7C3B00EE3B66 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		17DA9C4F2CCDA4E100F54F8B /* AddManuallyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddManuallyView.swift; sourceTree = "<group>"; };
+		17DA9C522CCDAB1200F54F8B /* SelectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGroupView.swift; sourceTree = "<group>"; };
+		17DA9C542CCDBA0000F54F8B /* ScanReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReceiptView.swift; sourceTree = "<group>"; };
+		17DA9C582CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAddFromReceiptView.swift; sourceTree = "<group>"; };
 		ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +136,10 @@
 			isa = PBXGroup;
 			children = (
 				17CD07352CCD5FE500EE3B66 /* AddTab.swift */,
+				17DA9C522CCDAB1200F54F8B /* SelectGroupView.swift */,
+				17DA9C4F2CCDA4E100F54F8B /* AddManuallyView.swift */,
+				17DA9C542CCDBA0000F54F8B /* ScanReceiptView.swift */,
+				17DA9C582CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -221,15 +233,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				17CD074C2CCD785C00EE3B66 /* PaymentSubView.swift in Sources */,
+				17DA9C532CCDAB1200F54F8B /* SelectGroupView.swift in Sources */,
 				17CD073E2CCD628800EE3B66 /* Group.swift in Sources */,
 				17CD073A2CCD600200EE3B66 /* ViewModel.swift in Sources */,
 				17CD07382CCD5FED00EE3B66 /* GroupsTab.swift in Sources */,
 				17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */,
+				17DA9C502CCDA4E100F54F8B /* AddManuallyView.swift in Sources */,
 				17CD073C2CCD628200EE3B66 /* User.swift in Sources */,
+				17DA9C592CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift in Sources */,
 				17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */,
 				17CD074E2CCD7C3B00EE3B66 /* Util.swift in Sources */,
 				ADCA4D582CCD8987008D4CEA /* GroupsDetail.swift in Sources */,
 				17CD07332CCD5FD300EE3B66 /* ProfileTab.swift in Sources */,
+				17DA9C552CCDBA0000F54F8B /* ScanReceiptView.swift in Sources */,
 				17CD07402CCD628F00EE3B66 /* Payment.swift in Sources */,
 				17CD07362CCD5FE500EE3B66 /* AddTab.swift in Sources */,
 				17CD07422CCD644D00EE3B66 /* DataModel.swift in Sources */,

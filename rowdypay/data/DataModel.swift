@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class DataModel {
     //MARK: HELLO WORLD
@@ -182,8 +183,8 @@ class DataModel {
 
     //MARK: GET PAYMENTS FROM USER
     static func getPaymentsFromUser(id: Int, completion: @escaping ([Payment]) -> Void) {
-        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_payments") else {
-            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_payments")
+        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_user_payments") else {
+            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_user_payments")
             return
         }
                 
@@ -246,7 +247,7 @@ class DataModel {
     }
     
     //MARK: GET GROUPS FROM USER
-    static func getPaymentsFromUser(id: Int, completion: @escaping ([Group]) -> Void) {
+    static func getGroupsFromUser(id: Int, completion: @escaping ([Group]) -> Void) {
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_groups") else {
             print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_groups")
             return
@@ -329,13 +330,13 @@ class DataModel {
 
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    print("Error performing get_groups: \(error)")
+                    print("Error performing get_users_by_group: \(error)")
                     return
                 }
 
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {
-                    print("Server error performing get_groups")
+                    print("Server error performing get_users_by_group")
                     return
                 }
 
@@ -371,7 +372,111 @@ class DataModel {
             }
             .resume()
         } catch {
-            print("Error encoding JSON while getting payments from user id.")
+            print("Error encoding JSON while get_users_by_group")
         }
+    }
+    
+    // MARK: SUBMIT REQUEST (RETURN SUCCESS)
+    static func updateBalances(userID: Int, userIDs: [Int], groupID: Int, amount: Double, completion: @escaping (Bool) -> Void) {
+        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/update_balances") else {
+            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/update_balances")
+            return
+        }
+                
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let parameters: [String: Any] = ["submitter_id": userID, "group_id": groupID, "user_ids": userIDs, "amt": amount]
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            request.httpBody = jsonData
+
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Error performing update_balances: \(error)")
+                    return
+                }
+
+                guard let httpResponse = response as? HTTPURLResponse,
+                      (200...299).contains(httpResponse.statusCode) else {
+                    print("Server error performing update_balances")
+                    return
+                }
+
+                if let data = data {
+                    if let responseString = String(data: data, encoding: .utf8) {
+                        if responseString == "true"{
+                            completion(true)
+                        }
+                    }
+                    
+                    completion(false)
+                }
+            }
+            .resume()
+        } catch {
+            print("Error encoding JSON while update_balances.")
+        }
+    }
+    
+    //MARK: SEND IMAGE FOR ANALYSIS
+    static func sendImageForAnalysis(image: UIImage, completion: @escaping (Bool, Double) -> Void){
+        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/analyze_image") else {
+            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/analyze_image")
+            return
+        }
+
+        // Convert the image to JPEG data
+        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
+            print("Failed to convert image to data")
+            return
+        }
+
+        // Create the request
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // Set the content type to multipart/form-data
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        // Create the multipart form data
+        var body = Data()
+
+        // Append the image data to the body
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+        body.append(imageData)
+        body.append("\r\n".data(using: .utf8)!)
+        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+
+        // Set the body of the request
+        request.httpBody = body
+
+        // Create a URLSession data task
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            completion(true, 10.0)
+            
+            // Handle the response
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                print("Response status code: \(response.statusCode)")
+            }
+
+            // Optionally handle the data response if needed
+            if let data = data {
+                // Process the returned data
+                if let responseString = String(data: data, encoding: .utf8) {
+                    print("Response data: \(responseString)")
+                }
+            }
+        }.resume()
     }
 }
