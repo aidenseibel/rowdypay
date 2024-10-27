@@ -18,20 +18,24 @@ struct MakePayment: View {
 
     var body: some View {
         ZStack{
-
+            DotsCircleView()
+                .ignoresSafeArea()
             VStack(spacing: 16) {
                 Text("You owe: $\(amount, specifier: "%.2f")")
                     .font(.title)
                     .fontWeight(.bold)
+
                 
-                TextField("Payment Description (optional)", text: $description)
+                TextField("Payment Description (Optional)", text: $description)
+                    .foregroundColor(.white)
                     .padding()
                     .background(
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color(.systemGray6))
                     )
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
                     .padding(.horizontal)
-                
+
                 Button(action: {
                     makePayment()
                 }) {

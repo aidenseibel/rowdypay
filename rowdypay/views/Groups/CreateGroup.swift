@@ -29,7 +29,7 @@ struct CreateGroup: View {
             VStack(alignment: .leading, spacing: 25){
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Add Group Image")
-                        .font(.system(size: 18))
+                        .font(.system(size: 24))
                         .bold()
                     
                     Button {
@@ -43,7 +43,7 @@ struct CreateGroup: View {
                                     .frame(width: screenWidth * 0.50, height: screenWidth * 0.50)
                                 
                                 if imgStr == "" {
-                                    Text("Tap to select an image")
+                                    Text("Tap to Select an Image")
                                         .font(.system(size: 14))
                                         .foregroundColor(.gray)
                                 } else {
@@ -61,12 +61,12 @@ struct CreateGroup: View {
                 }
 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Add group name")
-                        .font(.system(size: 18))
+                    Text("Add Group Name")
+                        .font(.system(size: 24))
                         .bold()
                     
-                    TextField("Enter group name", text: $name)
-                        .font(.system(size: 26))
+                    TextField("Enter Group Name", text: $name)
+                        .font(.system(size: 16))
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 10)
@@ -75,12 +75,12 @@ struct CreateGroup: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Add users")
-                        .font(.system(size: 18))
+                    Text("Add Users")
+                        .font(.system(size: 24))
                         .bold()
                     
                     HStack {
-                        TextField("Enter user ID", text: $searchUserID)
+                        TextField("Enter User ID", text: $searchUserID)
                             .keyboardType(.numberPad)
                             .padding()
                             .background(
