@@ -75,7 +75,7 @@ struct ProfileTab: View {
                     
                     // MARK: RECENT PAYMENTS
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("My statistics")
+                        Text("My Statistics")
                             .font(.system(size: 24))
                             .bold()
                         
@@ -116,7 +116,7 @@ struct ProfileTab: View {
                         if isLoading {
                             HStack{
                                 Spacer()
-                                ProgressView("Loading payments...")
+                                ProgressView("Loading Payments...")
                                 Spacer()
                             }
                             .padding(20)
@@ -143,7 +143,7 @@ struct ProfileTab: View {
                     fetchPayments()
                 }
             }
-            .navigationTitle("My profile")
+            .navigationTitle("My Profile")
             .refreshable {
                 isLoading = true
                 fetchPayments()

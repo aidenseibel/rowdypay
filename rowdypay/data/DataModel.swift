@@ -494,6 +494,51 @@ class DataModel {
             print("Error encoding JSON while update_balances.")
         }
     }
+    static func leaveGroup(userID:Int, groupID:Int, completion: @escaping(Bool) ->Void){
+        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/leave_group") else {
+            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/leave_group")
+            completion(false)
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        var parameters: [String: Any] = [
+            "user_id": userID,
+            "group_id": groupID,
+        ]
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            request.httpBody = jsonData
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Leave Group error: \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                    if let httpResponse = response as? HTTPURLResponse {
+                        print("Server error leaving group. Status code: \(httpResponse.statusCode)")
+                    } else {
+                        print("Server error leaving group. No response received.")
+                    }
+                    completion(false)
+                    return
+                }
+                
+
+                completion(true)
+            }
+            .resume()
+        } catch {
+            print("Error encoding JSON: \(error.localizedDescription)")
+            completion(false)
+        }
+    }
+
     
     static func makePayment(userID: Int, groupID: Int, amount: Double, description: String? = nil, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/make_payment") else {

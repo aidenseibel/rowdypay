@@ -23,7 +23,7 @@ struct AddTab: View {
                     } label: {
                         HStack(spacing: 15){
                             VStack(alignment: .leading, spacing: 7){
-                                Text("Add manually")
+                                Text("Add Manually")
                                     .font(.system(size: 22))
                                     .bold()
                                 Text("Enter the price details manually to add a request to a group.")
@@ -61,7 +61,7 @@ struct AddTab: View {
                     } label: {
                         HStack(spacing: 15){
                             VStack(alignment: .leading, spacing: 7){
-                                Text("Scan a receipt")
+                                Text("Scan a Receipt")
                                     .font(.system(size: 22))
                                     .bold()
                                 Text("Use your phone's camera to read a receipt and autofill the price details.")
@@ -95,7 +95,7 @@ struct AddTab: View {
                 }
                 .padding(10)
             }
-            .navigationTitle("Add a new request")
+            .navigationTitle("Add a New Request")
             .navigationBarTitleDisplayMode(.large)
             .onAppear{
                 viewModel.isTabBarShowing = true
