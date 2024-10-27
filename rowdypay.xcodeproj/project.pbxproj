@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1711C5CF2CCDE6C30061C334 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1711C5CE2CCDE6C30061C334 /* TabBar.swift */; };
+		171D51FA2CCE13F000F3EBA1 /* ChangeAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D51F92CCE13F000F3EBA1 /* ChangeAvatarView.swift */; };
+		171D51FD2CCE1AD000F3EBA1 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 171D51FC2CCE1AD000F3EBA1 /* OpenAI */; };
+		171D51FF2CCE247000F3EBA1 /* OpenAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171D51FE2CCE247000F3EBA1 /* OpenAI.swift */; };
 		17C3165F2CCDFA39003550B5 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C3165E2CCDFA39003550B5 /* Onboarding.swift */; };
 		17C316612CCDFDD5003550B5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C316602CCDFDD5003550B5 /* SettingsView.swift */; };
 		17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD07222CCD5F9100EE3B66 /* rowdypayApp.swift */; };
@@ -36,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		1711C5CE2CCDE6C30061C334 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		171D51F92CCE13F000F3EBA1 /* ChangeAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAvatarView.swift; sourceTree = "<group>"; };
+		171D51FE2CCE247000F3EBA1 /* OpenAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAI.swift; sourceTree = "<group>"; };
 		17C3165E2CCDFA39003550B5 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		17C316602CCDFDD5003550B5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		17CD071F2CCD5F9100EE3B66 /* rowdypay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rowdypay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				171D51FD2CCE1AD000F3EBA1 /* OpenAI in Frameworks */,
 				17DA9C5C2CCDD7C400F54F8B /* Shimmer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,6 +147,7 @@
 				17CD073F2CCD628F00EE3B66 /* Payment.swift */,
 				17CD073D2CCD628800EE3B66 /* Group.swift */,
 				17CD074D2CCD7C3B00EE3B66 /* Util.swift */,
+				171D51FE2CCE247000F3EBA1 /* OpenAI.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -149,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				17CD07322CCD5FD300EE3B66 /* ProfileTab.swift */,
+				171D51F92CCE13F000F3EBA1 /* ChangeAvatarView.swift */,
 				17C316602CCDFDD5003550B5 /* SettingsView.swift */,
 			);
 			path = Profile;
@@ -205,6 +213,7 @@
 			name = rowdypay;
 			packageProductDependencies = (
 				17DA9C5B2CCDD7C400F54F8B /* Shimmer */,
+				171D51FC2CCE1AD000F3EBA1 /* OpenAI */,
 			);
 			productName = rowdypay;
 			productReference = 17CD071F2CCD5F9100EE3B66 /* rowdypay.app */;
@@ -236,6 +245,7 @@
 			mainGroup = 17CD07162CCD5F9100EE3B66;
 			packageReferences = (
 				17DA9C5A2CCDD7C400F54F8B /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				171D51FB2CCE1AD000F3EBA1 /* XCRemoteSwiftPackageReference "OpenAI" */,
 			);
 			productRefGroup = 17CD07202CCD5F9100EE3B66 /* Products */;
 			projectDirPath = "";
@@ -266,6 +276,7 @@
 				17C316612CCDFDD5003550B5 /* SettingsView.swift in Sources */,
 				17CD074C2CCD785C00EE3B66 /* PaymentSubView.swift in Sources */,
 				17DA9C532CCDAB1200F54F8B /* SelectGroupView.swift in Sources */,
+				171D51FF2CCE247000F3EBA1 /* OpenAI.swift in Sources */,
 				17C3165F2CCDFA39003550B5 /* Onboarding.swift in Sources */,
 				1711C5CF2CCDE6C30061C334 /* TabBar.swift in Sources */,
 				17CD073E2CCD628800EE3B66 /* Group.swift in Sources */,
@@ -282,6 +293,7 @@
 				ADCA4D582CCD8987008D4CEA /* GroupsDetail.swift in Sources */,
 				17CD07332CCD5FD300EE3B66 /* ProfileTab.swift in Sources */,
 				17DA9C552CCDBA0000F54F8B /* ScanReceiptView.swift in Sources */,
+				171D51FA2CCE13F000F3EBA1 /* ChangeAvatarView.swift in Sources */,
 				17CD07402CCD628F00EE3B66 /* Payment.swift in Sources */,
 				17CD07362CCD5FE500EE3B66 /* AddTab.swift in Sources */,
 				17CD07422CCD644D00EE3B66 /* DataModel.swift in Sources */,
@@ -494,6 +506,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		171D51FB2CCE1AD000F3EBA1 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/OpenAI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
 		17DA9C5A2CCDD7C400F54F8B /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
@@ -505,6 +525,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		171D51FC2CCE1AD000F3EBA1 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 171D51FB2CCE1AD000F3EBA1 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
+		};
 		17DA9C5B2CCDD7C400F54F8B /* Shimmer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 17DA9C5A2CCDD7C400F54F8B /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;

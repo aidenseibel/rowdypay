@@ -13,7 +13,6 @@ struct Onboarding: View {
     @State var logInUsername:String = ""
     @State var logInPassword:String = ""
 
-    @State var signUpUsername:String = ""
     @State var signUpEmail:String = ""
     @State var signUpPassword:String = ""
     @State var signUpPasswordConfirm:String = ""
@@ -69,14 +68,8 @@ struct Onboarding: View {
                 
                 else{
                     VStack(alignment: .leading, spacing: 10){
-                        TextField("First Name...", text: $displayName)
+                        TextField("Display Name...", text: $displayName)
                             .autocorrectionDisabled()
-                            .padding(10)
-                            .background(Color(.darkerGray))
-                            .cornerRadius(10)
-                        TextField("Username...", text: $signUpUsername)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
                             .padding(10)
                             .background(Color(.darkerGray))
                             .cornerRadius(10)
@@ -131,7 +124,7 @@ struct Onboarding: View {
     }
     
     func signUpFieldsAreValid() -> Bool{
-        if !signUpUsername.isEmpty && !signUpPassword.isEmpty && (signUpPassword == signUpPasswordConfirm){
+        if !signUpPassword.isEmpty && (signUpPassword == signUpPasswordConfirm){
             return true
         }
         fieldsAreNotValid = true

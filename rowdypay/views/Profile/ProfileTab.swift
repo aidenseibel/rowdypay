@@ -14,6 +14,10 @@ struct ProfileTab: View {
     @State private var isLoading: Bool = true
     @State private var errorMessage: String? // Optional error message
     let screenWidth = UIScreen.main.bounds.width
+    
+    @State var openChangeAvatar: Bool = false
+    
+    @State var userAvatar: String = "car"
 
     var body: some View {
         NavigationStack {
@@ -24,24 +28,35 @@ struct ProfileTab: View {
                     HStack {
                         Spacer()
                         VStack(alignment: .center, spacing: 20) {
-                            ZStack{
-                                Image(viewModel.localUser.image)
-                                    .resizable()
-                                    .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
-                                    .cornerRadius(screenWidth * 0.35)
-                                    .padding()
-                                    .overlay(
-                                        Circle()
-                                            .stroke(Color.gray, lineWidth: 1)
-                                    )
+                            Button {
+                                openChangeAvatar = true
+                            } label: {
+                                ZStack{
+                                    Circle()
+                                        .frame(width: screenWidth * 0.50, height: screenWidth * 0.50)
+                                        .cornerRadius(screenWidth * 0.35)
+                                        .opacity(0.05)
+                                        .padding()
 
-                                Circle()
-                                    .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
-                                    .cornerRadius(screenWidth * 0.35)
-                                    .padding()
-                                    .opacity(0.10)
-                                    .shimmering()
+                                    Image(viewModel.localUser.image)
+                                        .resizable()
+                                        .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
+                                        .cornerRadius(screenWidth * 0.35)
+                                        .padding()
+                                        .overlay(
+                                            Circle()
+                                                .stroke(Color.gray, lineWidth: 1)
+                                        )
+
+                                    Circle()
+                                        .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
+                                        .cornerRadius(screenWidth * 0.35)
+                                        .padding()
+                                        .opacity(0.10)
+                                        .shimmering()
+                                }
                             }
+                            .buttonStyle(.plain)
                             
                             VStack(alignment: .center, spacing: 7) {
                                 Text(viewModel.localUser.username) // Assuming 'username' is a property in localUser
@@ -132,7 +147,14 @@ struct ProfileTab: View {
                     Image(systemName: "gear")}
                 )
             )
-
+            .sheet(isPresented: $openChangeAvatar, onDismiss: {
+                openChangeAvatar = false
+            }, content: {
+                ChangeAvatarView()
+                    .onDisappear{
+                        
+                    }
+            })
         }
     }
 

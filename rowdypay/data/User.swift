@@ -46,7 +46,7 @@ class User: Identifiable, Hashable, Codable {
         self.id = 1
         self.username = "user_1"
         self.email = "user@gmail.com"
-        self.image = "sample_profile_image"
+        self.image = "car"
         self.groups = []
         self.payments = []
         self.dateJoined = Date()
