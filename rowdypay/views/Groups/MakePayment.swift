@@ -68,6 +68,8 @@ struct MakePayment: View {
         .onAppear(){
             viewModel.isTabBarShowing = false
         }
+        
+        
     }
 
     private func makePayment() {

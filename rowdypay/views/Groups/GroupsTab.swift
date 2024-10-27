@@ -76,6 +76,7 @@ struct GroupsTab: View {
             }
         }
     }
+    
 }
 #Preview {
     GroupsTab()
