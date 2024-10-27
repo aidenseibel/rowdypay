@@ -26,11 +26,11 @@ struct MotionAnimatorView: View {
     //RANDOM SPEED
     func randomSpeed() ->Double{
         return Double.random(in: 1.5...3.0)
-    }
+    
     
     //RANDOM DELAY
     func randomDelay() ->Double{
-        return Double.random(in: 0.1...1.5)
+        return Double.random(in: 0.2...1.0)
     }
 
 
@@ -101,6 +101,9 @@ struct SpringAnimationModifier: ViewModifier {
                 value: isAnimating
             )
     }
+}
+struct SharedViews {
+    static let motionAnimator = MotionAnimatorView()
 }
 #Preview {
     MotionAnimatorView()
