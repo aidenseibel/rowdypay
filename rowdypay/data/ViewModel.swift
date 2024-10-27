@@ -13,6 +13,19 @@ public class ViewModel: ObservableObject {
     @Published var hasOnboarded: Bool = false
     
     init() {
-        localUser = User()
+        self.localUser = User()
+
+        if let email = UserDefaults.standard.string(forKey: "email"){
+            DataModel.authUser(email: email) { user in
+                DispatchQueue.main.async {
+                    print("changing local user")
+                    self.localUser = user
+                    self.hasOnboarded = true
+                }
+            }
+        } else {
+            self.localUser = User()
+            self.hasOnboarded = false
+        }
     }
 }

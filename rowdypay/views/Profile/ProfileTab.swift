@@ -77,27 +77,32 @@ struct ProfileTab: View {
                             .font(.system(size: 24))
                             .bold()
                         
-                        HStack(alignment: .center, spacing: 10){
-                                Image("a")
-                                .resizable()
-                                .frame(width: screenWidth * 0.25, height: screenWidth * 0.25)
-                                .scaledToFill()
-                                .cornerRadius(10)
-                            
-                                VStack(alignment: .leading, spacing: 5){
-                                    Text("Your Reliability: ") + Text("Stellar")
-                                        .font(.system(size: 18))
-                                        .bold()
-                                    Text("You've been making regular payments and keeping up with your groups. Good job!")
-                                        .font(.system(size: 12))
-                                        .foregroundStyle(.gray)
-                                }
-
-                            Spacer()
+                        NavigationLink {
+                            ReliabilityReportView()
+                        } label: {
+                            HStack(alignment: .center, spacing: 10){
+                                    Image("a")
+                                    .resizable()
+                                    .frame(width: screenWidth * 0.25, height: screenWidth * 0.25)
+                                    .scaledToFill()
+                                    .cornerRadius(10)
+                                
+                                    VStack(alignment: .leading, spacing: 5){
+                                        Text("Your Reliability: ") + Text("Stellar")
+                                            .font(.system(size: 18))
+                                            .bold()
+                                        Text("Click here to check out your reliability report!")
+                                            .font(.system(size: 12))
+                                            .foregroundStyle(.gray)
+                                    }
+                                Spacer()
+                            }
+                            .padding(8)
+                            .background(Color(.darkerGray))
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
                         }
-                        .padding(8)
-                        .background(Color(.darkerGray))
-                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
+                        .buttonStyle(.plain)
+
                     }
                     
                     // MARK: RECENT PAYMENTS

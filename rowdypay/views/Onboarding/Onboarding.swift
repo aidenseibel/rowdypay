@@ -10,7 +10,7 @@ import SwiftUI
 struct Onboarding: View {
     @EnvironmentObject var viewModel: ViewModel
     
-    @State var logInUsername:String = ""
+    @State var logInEmail:String = ""
     @State var logInPassword:String = ""
 
     @State var signUpEmail:String = ""
@@ -23,9 +23,16 @@ struct Onboarding: View {
     
     @State var fieldsAreNotValid: Bool = false
     
+    let screenWidth = UIScreen.main.bounds.width
+    
     var body: some View {
         ScrollView(showsIndicators: false){
             VStack(alignment: .leading, spacing: 30){
+                Image("icon")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: screenWidth * 0.70, height: screenWidth * 0.70)
+                    .cornerRadius(20)
                 Text("Welcome to RowdyPay")
                     .font(.system(size: 42))
                     .bold()
@@ -36,10 +43,9 @@ struct Onboarding: View {
                     }
                 }.pickerStyle(.segmented).shadow(radius: 8)
                 
-                
                 if onboardingMode == "Log In"{
                     VStack(alignment: .leading, spacing: 10){
-                        TextField("Username or email...", text: $logInUsername)
+                        TextField("Email...", text: $logInEmail)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
                             .keyboardType(.emailAddress)
@@ -56,7 +62,7 @@ struct Onboarding: View {
                         
                         Button {
                             if logInFieldsAreValid(){
-                                viewModel.hasOnboarded = true
+                                authUser()
                             }
                         } label: {
                             Text("Submit")
@@ -96,7 +102,7 @@ struct Onboarding: View {
                             
                         Button {
                             if signUpFieldsAreValid(){
-                                viewModel.hasOnboarded = true
+                                signUpUser()
                             }
                         } label: {
                             Text("Submit")
@@ -116,7 +122,7 @@ struct Onboarding: View {
     }
     
     func logInFieldsAreValid() -> Bool{
-        if !logInUsername.isEmpty && !logInPassword.isEmpty{
+        if !logInEmail.isEmpty && !logInPassword.isEmpty{
             return true
         }
         fieldsAreNotValid = true
@@ -129,6 +135,26 @@ struct Onboarding: View {
         }
         fieldsAreNotValid = true
         return false
+    }
+    
+    func authUser() {
+        DataModel.authUser(email: logInEmail) { user in
+            DispatchQueue.main.async {
+                viewModel.localUser = user
+                viewModel.hasOnboarded = true
+                UserDefaults.standard.setValue(logInEmail, forKey: "email")
+            }
+        }
+    }
+    
+    func signUpUser() {
+        DataModel.createUser(display_name: displayName, email: signUpEmail) { user in
+            DispatchQueue.main.async {
+                viewModel.localUser = user
+                viewModel.hasOnboarded = true
+                UserDefaults.standard.setValue(signUpEmail, forKey: "email")
+            }
+        }
     }
 }
 
