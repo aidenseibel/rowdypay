@@ -59,20 +59,7 @@ class Payment: Identifiable, Hashable, Codable {
         self.description = try container.decode(String.self, forKey: .description)
         self.amount = try container.decode(Double.self, forKey: .amount)
 
-        
-        // Decode the date from the nested JSON object
-        let dateContainer = try container.nestedContainer(keyedBy: DateCodingKeys.self, forKey: .date)
-        let day = try dateContainer.decode(Int.self, forKey: .day)
-        let month = try dateContainer.decode(Int.self, forKey: .month)
-        let year = try dateContainer.decode(Int.self, forKey: .year)
-        
-        // Create a Date from the components
-        var dateComponents = DateComponents()
-        dateComponents.day = day
-        dateComponents.month = month
-        dateComponents.year = year
-        
-        let calendar = Calendar.current
-        self.date = calendar.date(from: dateComponents) ?? Date() // Fallback to current date if decoding fails
+        let utc_timestamp = try container.decode(Int.self, forKey: .date)
+        self.date = Date(timeIntervalSince1970: TimeInterval(utc_timestamp))
     }
 }

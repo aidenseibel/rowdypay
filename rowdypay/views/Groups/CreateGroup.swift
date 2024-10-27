@@ -26,48 +26,61 @@ struct CreateGroup: View {
 
     var body: some View {
         ScrollView{
-            VStack(alignment: .leading, spacing: 40){
-                Button {
-                    openChangeAvatar = true
-                } label: {
-                    HStack{
-                        Spacer()
-                        ZStack {
-                            RoundedRectangle(cornerRadius: screenWidth * 0.30)
-                                .fill(Color(.darkerGray))
-                                .frame(width: screenWidth * 0.60, height: screenWidth * 0.60)
-                            
-                            if imgStr == "" {
-                                Text("Tap to Select an Image")
-                                    .foregroundColor(.gray)
-                            } else {
-                                Image(imgStr)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: screenWidth * 0.60, height: screenWidth * 0.60)
-                                    .clipShape(RoundedRectangle(cornerRadius: screenWidth * 0.30))
-                            }
-                        }
-                        Spacer()
-                    }
-                }
-
-                TextField("Enter Group Name", text: $name)
-                    .font(.system(size: 28))
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(.systemGray6))
-                    )
-                
+            VStack(alignment: .leading, spacing: 25){
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Add Users")
-                        .font(.system(size: 24))
+                    Text("Add Group Image")
+                        .font(.system(size: 18))
                         .bold()
                     
+                    Button {
+                        openChangeAvatar = true
+                    } label: {
+                        HStack{
+                            Spacer()
+                            ZStack {
+                                RoundedRectangle(cornerRadius: screenWidth * 0.25)
+                                    .fill(Color(.darkerGray))
+                                    .frame(width: screenWidth * 0.50, height: screenWidth * 0.50)
+                                
+                                if imgStr == "" {
+                                    Text("Tap to select an image")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.gray)
+                                } else {
+                                    Image(imgStr)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: screenWidth * 0.50, height: screenWidth * 0.50)
+                                        .clipShape(RoundedRectangle(cornerRadius: screenWidth * 0.25))
+                                }
+                            }
+                            Spacer()
+                        }
+                    }
+
+                }
+
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Add group name")
+                        .font(.system(size: 18))
+                        .bold()
+                    
+                    TextField("Enter group name", text: $name)
+                        .font(.system(size: 26))
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color(.systemGray6))
+                        )
+                }
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Add users")
+                        .font(.system(size: 18))
+                        .bold()
                     
                     HStack {
-                        TextField("Enter User ID", text: $searchUserID)
+                        TextField("Enter user ID", text: $searchUserID)
                             .keyboardType(.numberPad)
                             .padding()
                             .background(
@@ -75,13 +88,18 @@ struct CreateGroup: View {
                                     .fill(Color(.systemGray6))
                             )
                         
-                        Button("Add User") {
+                        Button {
                             searchUser()
+                        } label: {
+                            Text("Add User")
+                                .foregroundColor(.accent)
                         }
                         .disabled(searchUserID.isEmpty || isSearching)
+
+
                     }
                 }
-                
+        
                 // Display added users
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
@@ -105,7 +123,6 @@ struct CreateGroup: View {
                     }
                 }
                 
-                Spacer()
                 Button(action: {
                     createGroup()
                 }) {
@@ -118,22 +135,15 @@ struct CreateGroup: View {
                     .foregroundColor(.white)
                     .background(.orange)
                     .cornerRadius(10)
-                    .padding()
                 }
             }
             .padding()
         }
+        .onAppear{
+            viewModel.isTabBarShowing = false
+        }
         .onTapGesture {
             self.endTextEditing()
-        }
-        .onAppear(){
-            viewModel.isTabBarShowing = false
-        }
-        .onDisappear(){
-            viewModel.isTabBarShowing = true
-        }
-        .refreshable {
-            viewModel.isTabBarShowing = false
         }
         .navigationTitle("Create New Group")
         .alert("User Not Found or User Already Added", isPresented: $showUserAlert) {
@@ -163,10 +173,8 @@ struct CreateGroup: View {
             createSuccess = success
             showGroupAlert = true
         }
-
-
-        
     }
+    
     private func searchUser() {
         guard !searchUserID.isEmpty else { return }
         guard let userID = Int(searchUserID) else { return }

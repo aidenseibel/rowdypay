@@ -24,7 +24,6 @@ struct SelectGroupView: View {
                         GroupSubView(group: group)
                     }
                     .buttonStyle(.plain)
-                    .padding()
                 }
             }
             .padding(10)
