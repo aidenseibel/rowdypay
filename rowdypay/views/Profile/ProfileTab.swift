@@ -143,7 +143,7 @@ struct ProfileTab: View {
                     fetchPayments()
                 }
             }
-            .navigationTitle("my profile")
+            .navigationTitle("My profile")
             .refreshable {
                 isLoading = true
                 fetchPayments()
