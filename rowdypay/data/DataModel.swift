@@ -545,7 +545,7 @@ class DataModel {
     static func sendImageToOpenAI(image: UIImage, completion: @escaping (Bool, Double) -> Void) {
         let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 512, height: 512))
         
-        let api_key : String = ""
+        let api_key : String = "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"
         
         guard let imageData = resizedImage.jpegData(compressionQuality: 0.5)?.base64EncodedString() else {
             return
