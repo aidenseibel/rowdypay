@@ -9,10 +9,19 @@ import SwiftUI
 
 struct PaymentSubView: View {
     var payment: Payment
+    var showsUser: Bool
+
     @State private var group: Group?
+    @State private var user: User?
     
     init(payment: Payment) {
         self.payment = payment
+        self.showsUser = false
+    }
+    
+    init(payment: Payment, showsUser: Bool) {
+        self.payment = payment
+        self.showsUser = showsUser
     }
     
     var body: some View {
@@ -29,9 +38,20 @@ struct PaymentSubView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 7){
-                    Text("$" + String(format: "%.2f", payment.amount) + " to \(group.name)")
-                        .lineLimit(1)
-                        .font(.system(size: 16))
+                    
+                    
+                    if showsUser{
+                        if let user = user{
+                            Text("$" + String(format: "%.2f", payment.amount) + " from \(user.username)")
+                                .lineLimit(1)
+                                .font(.system(size: 16))
+                        }
+                    } else {
+                        Text("$" + String(format: "%.2f", payment.amount) + " to \(group.name)")
+                            .lineLimit(1)
+                            .font(.system(size: 16))
+                    }
+                              
                     HStack {
                         Text(formatDateToCustomString(date: payment.date))
                             .font(.system(size: 12))
@@ -54,8 +74,26 @@ struct PaymentSubView: View {
         .background(Color(.darkerGray))
         .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
         .onAppear {
-            DataModel.getGroup(id: payment.group) { fetchedGroup in
-                self.group = fetchedGroup
+            fetchGroup()
+            fetchUser()
+        }
+    }
+    
+    func fetchGroup(){
+        DataModel.getGroup(id: payment.group) { fetchedGroup in
+            self.group = fetchedGroup
+        }
+
+    }
+    
+    func fetchUser() {
+        DataModel.getUser(id: payment.user) { result in
+            switch result {
+            case .success(let fetchedUser):
+                self.user = fetchedUser
+            case .failure(let error):
+                // Handle the error appropriately, e.g., log it or show an alert
+                print("Failed to fetch user: \(error.localizedDescription)")
             }
         }
     }

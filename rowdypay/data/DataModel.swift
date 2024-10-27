@@ -256,6 +256,72 @@ class DataModel {
         }
     }
     
+    //MARK: GET PAYMENTS FROM GROUP
+    static func getPaymentsFromGroup(id: Int, completion: @escaping ([Payment]) -> Void) {
+        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_group_payments") else {
+            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_group_payments")
+            return
+        }
+                
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let parameters: [String: Any] = ["group_id": id]
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            request.httpBody = jsonData
+
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Error performing get_group_payment: \(error)")
+                    return
+                }
+
+                print(response)
+                guard let httpResponse = response as? HTTPURLResponse,
+                      (200...299).contains(httpResponse.statusCode) else {
+                    print("Server error performing get_group_payment")
+                    return
+                }
+
+                if let data = data {
+                    do {
+                        // Try to convert to an array of dictionaries
+                        let json = try JSONSerialization.jsonObject(with: data, options: [])
+                        if let dict = json as? [[String: Any]] {
+                            var payments: [Payment] = []
+                            
+                            for p in dict {
+                                do {
+                                    // Convert dictionary to JSON data
+                                    let paymentData = try JSONSerialization.data(withJSONObject: p, options: [])
+                                    
+                                    // Decode the JSON data into a Payment object
+                                    let payment = try JSONDecoder().decode(Payment.self, from: paymentData)
+                                    payments.append(payment)
+                                } catch {
+                                    print("Error decoding payment: \(error)")
+                                }
+                            }
+                            
+                            // Call the completion handler with the payments array
+                            completion(payments)
+                        } else {
+                            print("Failed parsing JSON as array of dictionaries")
+                        }
+                    } catch {
+                        print("Something went wrong with JSON parsing get_group_payment: \(error)")
+                    }
+                }
+            }
+            .resume()
+        } catch {
+            print("Error encoding JSON while getting get_group_payment.")
+        }
+    }
+    
     //MARK: GET GROUPS FROM USER
     static func getGroupsFromUser(id: Int, completion: @escaping ([Group]) -> Void) {
         
