@@ -37,6 +37,9 @@
 		AD86828A2CCDE62400336FD9 /* MakePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8682892CCDE62400336FD9 /* MakePayment.swift */; };
 		AD86828C2CCDF6AB00336FD9 /* CreateGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD86828B2CCDF6AB00336FD9 /* CreateGroup.swift */; };
 		AD8682902CCE2F7300336FD9 /* ChangeGroupAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD86828F2CCE2F7300336FD9 /* ChangeGroupAvatarView.swift */; };
+		AD8682922CCE827400336FD9 /* MotionAnimatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8682912CCE827400336FD9 /* MotionAnimatorView.swift */; };
+		AD8682982CCE8C8700336FD9 /* DotsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8682972CCE8C8700336FD9 /* DotsCircleView.swift */; };
+		AD86829A2CCE8E4300336FD9 /* CirclesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8682992CCE8E4300336FD9 /* CirclesView.swift */; };
 		ADCA4D582CCD8987008D4CEA /* GroupsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +74,9 @@
 		AD8682892CCDE62400336FD9 /* MakePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePayment.swift; sourceTree = "<group>"; };
 		AD86828B2CCDF6AB00336FD9 /* CreateGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroup.swift; sourceTree = "<group>"; };
 		AD86828F2CCE2F7300336FD9 /* ChangeGroupAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGroupAvatarView.swift; sourceTree = "<group>"; };
+		AD8682912CCE827400336FD9 /* MotionAnimatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionAnimatorView.swift; sourceTree = "<group>"; };
+		AD8682972CCE8C8700336FD9 /* DotsCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsCircleView.swift; sourceTree = "<group>"; };
+		AD8682992CCE8E4300336FD9 /* CirclesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesView.swift; sourceTree = "<group>"; };
 		ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -198,6 +204,9 @@
 			isa = PBXGroup;
 			children = (
 				17CD07492CCD6DF300EE3B66 /* GroupSubView.swift */,
+				AD8682992CCE8E4300336FD9 /* CirclesView.swift */,
+				AD8682912CCE827400336FD9 /* MotionAnimatorView.swift */,
+				AD8682972CCE8C8700336FD9 /* DotsCircleView.swift */,
 				17CD074B2CCD785C00EE3B66 /* PaymentSubView.swift */,
 				1711C5CE2CCDE6C30061C334 /* TabBar.swift */,
 			);
@@ -295,12 +304,14 @@
 				17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */,
 				AD8682902CCE2F7300336FD9 /* ChangeGroupAvatarView.swift in Sources */,
 				17DA9C502CCDA4E100F54F8B /* AddManuallyView.swift in Sources */,
+				AD8682982CCE8C8700336FD9 /* DotsCircleView.swift in Sources */,
 				17FD4ED62CCE3C8C00D7A4E7 /* ReliabilityReportView.swift in Sources */,
 				17CD073C2CCD628200EE3B66 /* User.swift in Sources */,
 				AD86828C2CCDF6AB00336FD9 /* CreateGroup.swift in Sources */,
 				AD86828A2CCDE62400336FD9 /* MakePayment.swift in Sources */,
 				17DA9C592CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift in Sources */,
 				17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */,
+				AD86829A2CCE8E4300336FD9 /* CirclesView.swift in Sources */,
 				17CD074E2CCD7C3B00EE3B66 /* Util.swift in Sources */,
 				ADCA4D582CCD8987008D4CEA /* GroupsDetail.swift in Sources */,
 				17CD07332CCD5FD300EE3B66 /* ProfileTab.swift in Sources */,
@@ -309,6 +320,7 @@
 				17CD07402CCD628F00EE3B66 /* Payment.swift in Sources */,
 				17CD07362CCD5FE500EE3B66 /* AddTab.swift in Sources */,
 				17CD07422CCD644D00EE3B66 /* DataModel.swift in Sources */,
+				AD8682922CCE827400336FD9 /* MotionAnimatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

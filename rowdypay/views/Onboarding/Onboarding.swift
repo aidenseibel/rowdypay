@@ -26,100 +26,105 @@ struct Onboarding: View {
     let screenWidth = UIScreen.main.bounds.width
     
     var body: some View {
-        ScrollView(showsIndicators: false){
-            VStack(alignment: .leading, spacing: 30){
-                Image("icon")
-                    .resizable()
-                    .frame(width: screenWidth * 0.3, height: screenWidth * 0.3)
-                    .padding(.top, 20)
-                    .cornerRadius(10)
-                
-                Text("Welcome to RowdyPay")
-                    .font(.system(size: 42))
-                    .bold()
-
-                Picker("driving", selection: $onboardingMode) {
-                    ForEach(onboardingOptions, id: \.self){option in
-                        Text("\(option)")
-                    }
-                }.pickerStyle(.segmented).shadow(radius: 8)
-                
-                if onboardingMode == "Log In"{
-                    VStack(alignment: .leading, spacing: 10){
-                        TextField("Email...", text: $logInEmail)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
-                            .keyboardType(.emailAddress)
-                            .padding(10)
-                            .background(Color(.darkerGray))
-                            .cornerRadius(10)
-                        SecureField("Password...", text: $logInPassword)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
-                            .padding(10)
-                            .background(Color(.darkerGray))
-                            .cornerRadius(10)
-                        
-                        
-                        Button {
-                            if logInFieldsAreValid(){
-                                authUser()
-                            }
-                        } label: {
-                            Text("Submit")
-                                .font(.system(size: 18))
-                        }
+        ZStack {
+            CirclesView() // Add this first in the ZStack
+                .padding(.vertical, 50)
+                .ignoresSafeArea()
+            ScrollView(showsIndicators: false){
+                VStack(alignment: .leading, spacing: 30){
+                    Image("icon")
+                        .resizable()
+                        .frame(width: screenWidth * 0.3, height: screenWidth * 0.3)
                         .padding(.top, 20)
-
-                    }
-                }
-                
-                else{
-                    VStack(alignment: .leading, spacing: 10){
-                        TextField("Display Name...", text: $displayName)
-                            .autocorrectionDisabled()
-                            .padding(10)
-                            .background(Color(.darkerGray))
-                            .cornerRadius(10)
-                        TextField("Email...", text: $signUpEmail)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
-                            .keyboardType(.emailAddress)
-                            .padding(10)
-                            .background(Color(.darkerGray))
-                            .cornerRadius(10)
-                        SecureField("Password...", text: $signUpPassword)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
-                            .padding(10)
-                            .background(Color(.darkerGray))
-                            .cornerRadius(10)
-                        SecureField("Confirm Password...", text: $signUpPasswordConfirm)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
-                            .padding(10)
-                            .background(Color(.darkerGray))
-                            .cornerRadius(10)
-                      
+                        .cornerRadius(10)
+                    
+                    Text("Welcome to RowdyPay")
+                        .font(.system(size: 42))
+                        .bold()
+                    
+                    Picker("driving", selection: $onboardingMode) {
+                        ForEach(onboardingOptions, id: \.self){option in
+                            Text("\(option)")
+                        }
+                    }.pickerStyle(.segmented).shadow(radius: 8)
+                    
+                    if onboardingMode == "Log In"{
+                        VStack(alignment: .leading, spacing: 10){
+                            TextField("Email...", text: $logInEmail)
+                                .autocorrectionDisabled()
+                                .textInputAutocapitalization(.never)
+                                .keyboardType(.emailAddress)
+                                .padding(10)
+                                .background(Color(.darkerGray))
+                                .cornerRadius(10)
+                            SecureField("Password...", text: $logInPassword)
+                                .autocorrectionDisabled()
+                                .textInputAutocapitalization(.never)
+                                .padding(10)
+                                .background(Color(.darkerGray))
+                                .cornerRadius(10)
                             
-                        Button {
-                            if signUpFieldsAreValid(){
-                                signUpUser()
+                            
+                            Button {
+                                if logInFieldsAreValid(){
+                                    authUser()
+                                }
+                            } label: {
+                                Text("Submit")
+                                    .font(.system(size: 18))
                             }
-                        } label: {
-                            Text("Submit")
-                                .font(.system(size: 18))
+                            .padding(.top, 20)
+                            
                         }
-                        .padding(.top, 20)
+                    }
+                    
+                    else{
+                        VStack(alignment: .leading, spacing: 10){
+                            TextField("Display Name...", text: $displayName)
+                                .autocorrectionDisabled()
+                                .padding(10)
+                                .background(Color(.darkerGray))
+                                .cornerRadius(10)
+                            TextField("Email...", text: $signUpEmail)
+                                .autocorrectionDisabled()
+                                .textInputAutocapitalization(.never)
+                                .keyboardType(.emailAddress)
+                                .padding(10)
+                                .background(Color(.darkerGray))
+                                .cornerRadius(10)
+                            SecureField("Password...", text: $signUpPassword)
+                                .autocorrectionDisabled()
+                                .textInputAutocapitalization(.never)
+                                .padding(10)
+                                .background(Color(.darkerGray))
+                                .cornerRadius(10)
+                            SecureField("Confirm Password...", text: $signUpPasswordConfirm)
+                                .autocorrectionDisabled()
+                                .textInputAutocapitalization(.never)
+                                .padding(10)
+                                .background(Color(.darkerGray))
+                                .cornerRadius(10)
+                            
+                            
+                            Button {
+                                if signUpFieldsAreValid(){
+                                    signUpUser()
+                                }
+                            } label: {
+                                Text("Submit")
+                                    .font(.system(size: 18))
+                            }
+                            .padding(.top, 20)
+                        }
+                    }
+                    
+                    if fieldsAreNotValid{
+                        Text("Ensure all fields are valid.")
+                            .foregroundStyle(.red)
                     }
                 }
-
-                if fieldsAreNotValid{
-                    Text("Ensure all fields are valid.")
-                        .foregroundStyle(.red)
-                }
+                .padding()
             }
-            .padding()
         }
     }
     

@@ -37,10 +37,14 @@ struct GroupsTab: View {
     }
     var body: some View {
         NavigationStack {
+        
             ZStack {
+                MotionAnimatorView()  // Add this first in the ZStack
+                    .ignoresSafeArea() // Make it fill the whole screen
+                ScrollView{
+
                 VStack{
                     HStack{
-                        Spacer()
                         Menu {
                             Button("Default") {
                                 sortOption = .none
@@ -65,45 +69,45 @@ struct GroupsTab: View {
                                     .fill(Color(.systemGray6))
                             )
                         }
+                        Spacer()
                     }
                     .padding(.horizontal)
                    
                     if isLoading {
                         ProgressView("Loading Groups...")
                     } else {
-                        ScrollView{
-                            VStack(alignment: .leading, spacing: 20) {
-                                ForEach(sortedGroups) { group in
-                                    NavigationLink {
-                                        GroupsDetail(thisgroup: group)
-                                    } label: {
-                                        GroupSubView(group: group)
-                                    }
-                                    .buttonStyle(.plain)
-                                }
-                                
+                        VStack(alignment: .leading, spacing: 20) {
+                            ForEach(sortedGroups) { group in
                                 NavigationLink {
-                                    CreateGroup()
+                                    GroupsDetail(thisgroup: group)
                                 } label: {
-                                    HStack {
-                                        Image(systemName: "plus.circle")
-                                            .fontWeight(.semibold)
-                                            .font(.headline)
-                                            .foregroundColor(.accent)
-                                        
-                                        Text("Create a Group")
-                                            .fontWeight(.semibold)
-                                            .font(.headline)
-                                            .foregroundColor(.accent)
-                                    }
-                                    .background(Color(UIColor.systemBackground))
+                                    GroupSubView(group: group)
                                 }
-                                .padding(.vertical, 8)
-                                .padding(.horizontal, 10)
+                                .buttonStyle(.plain)
                             }
-                            .padding(10)
-                            .padding(.bottom, 50)
+                            
+                            NavigationLink {
+                                CreateGroup()
+                            } label: {
+                                HStack {
+                                    Image(systemName: "plus.circle")
+                                        .fontWeight(.semibold)
+                                        .font(.headline)
+                                        .foregroundColor(.accent)
+                                    
+                                    Text("Create a Group")
+                                        .fontWeight(.semibold)
+                                        .font(.headline)
+                                        .foregroundColor(.accent)
+                                }
+                                .background(.clear)
+                            }
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 10)
                         }
+                        .padding(10)
+                        .padding(.bottom, 50)
+                    }
                     }
                 }
             }
