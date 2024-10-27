@@ -153,7 +153,7 @@ struct GroupsDetail: View {
             self.isLoading = false
         }
     }
-    public func fetchBalance(groupID: Int) {
+    private func fetchBalance(groupID: Int) {
         let groupID = groupID
         let userID = viewModel.localUser.id
         DataModel.getBalances(userID: userID, groupID: groupID) { result in
@@ -165,6 +165,7 @@ struct GroupsDetail: View {
             }
         }
     }
+
 }
 
 

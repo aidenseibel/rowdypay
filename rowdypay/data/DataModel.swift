@@ -352,8 +352,6 @@ class DataModel {
                 }
 
                 if let data = data {
-                    // Print raw response
-                    print("Raw response data:", String(data: data, encoding: .utf8) ?? "")
                     
                     do {
                         let json = try JSONSerialization.jsonObject(with: data, options: [])
@@ -431,21 +429,24 @@ class DataModel {
                 return
             }
             
+            // Print raw response and HTTP status
+            if let httpResponse = response as? HTTPURLResponse {
+                print("HTTP Status Code: \(httpResponse.statusCode)")
+            }
+            if let responseString = String(data: data, encoding: .utf8) {
+                print("Raw response: \(responseString)")
+            }
+            
+            // Try to decode the float value
             do {
-                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let balance = json["balance"] as? Double {
-                    DispatchQueue.main.async {
-                        completion(.success(balance))
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        completion(.failure(URLError(.cannotParseResponse)))
-                    }
+                let decoder = JSONDecoder()
+                let balance = try decoder.decode(Float.self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(Double(balance)))
                 }
             } catch {
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
+                print("Decoding error: \(error)")
+                completion(.failure(error))
             }
         }.resume()
     }
