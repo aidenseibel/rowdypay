@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct ScanReceiptView: View {
-//    @EnvironmentObject var viewModel: ViewModel
+    @EnvironmentObject var viewModel: ViewModel
     @Binding var navigationPath: NavigationPath
 
     @State var showImagePicker = false
