@@ -118,28 +118,36 @@ struct GroupsDetail: View {
                     .buttonStyle(PlainButtonStyle())
                 }
             }
-        .toolbar(.hidden, for: .tabBar)
         .navigationTitle(thisgroup.name)
         .onAppear {
             fetchUsers()
+            viewModel.isTabBarShowing = false
+        }
+        .onDisappear(){
+            viewModel.isTabBarShowing = true
         }
     }
     
     private func fetchUsers() {
-        
         let listofuserIDs = thisgroup.users
         let dispatchGroup = DispatchGroup()
-
+        
         var fetchedUsers = [User]()
-
+        
         for userID in listofuserIDs {
             dispatchGroup.enter()
-            DataModel.getUser(id: userID) { user in
-                fetchedUsers.append(user)
+            DataModel.getUser(id: userID) { result in
+                switch result {
+                case .success(let user):
+                    fetchedUsers.append(user)
+                case .failure(let error):
+                    print("Failed to fetch user \(userID): \(error)")
+                    // Optionally handle the error, maybe show an alert
+                }
                 dispatchGroup.leave()
             }
         }
-
+        
         dispatchGroup.notify(queue: .main) {
             self.users = fetchedUsers
             self.isLoading = false

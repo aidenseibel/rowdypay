@@ -32,7 +32,6 @@ struct GroupsTab: View {
                             }
                         }
                         
-                        // Create Group button at bottom
                         NavigationLink {
                             CreateGroup()
                         } label: {
@@ -59,9 +58,11 @@ struct GroupsTab: View {
         }
         .onAppear {
             fetchGroups()
+            viewModel.isTabBarShowing = true
         }
         .refreshable {
             fetchGroups()
+            viewModel.isTabBarShowing = true
         }
     }
     

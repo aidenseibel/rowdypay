@@ -54,6 +54,7 @@ struct MakePayment: View {
 
             Spacer()
         }
+        
         .padding()
         .alert(isPresented: $showAlert) {
             Alert(
@@ -63,6 +64,9 @@ struct MakePayment: View {
                     dismiss()
                 }
             )
+        }
+        .onAppear(){
+            viewModel.isTabBarShowing = false
         }
     }
 

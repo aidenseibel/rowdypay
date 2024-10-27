@@ -93,9 +93,10 @@ class DataModel {
     }
     
     //MARK: GET USER
-    static func getUser(id: Int, completion: @escaping (User) -> Void) {
+    static func getUser(id: Int, completion: @escaping (Result<User, Error>) -> Void) {
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_user") else {
             print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/get_user")
+            completion(.failure(URLError(.badURL)))
             return
         }
         
@@ -112,6 +113,7 @@ class DataModel {
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     print("Error performing get_user: \(error)")
+                    completion(.failure(error))
                     return
                 }
                 
@@ -119,6 +121,7 @@ class DataModel {
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {
                     print("Server error performing get_user")
+                    completion(.failure(URLError(.badServerResponse)))
                     return
                 }
                 
@@ -126,15 +129,17 @@ class DataModel {
                     do {
                         let decoder = JSONDecoder()
                         let user = try decoder.decode(User.self, from: data)
-                        completion(user)
+                        completion(.success(user))
                     } catch {
                         print("Something went wrong with JSON parsing user: \(error)")
+                        completion(.failure(error))
                     }
                 }
             }
             .resume()
         } catch {
             print("Error encoding JSON while doing get_user.")
+            completion(.failure(error))
         }
     }
 
@@ -487,6 +492,55 @@ class DataModel {
         }
     }
     
+    static func createGroup(groupName: String, image: String, users:[Int],creatorID:Int, completion: @escaping (Bool) -> Void) {
+        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/create_group") else {
+            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/create_group")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        var parameters: [String: Any] = [
+            "name": groupName,
+            "img": image,
+            "user_ids":users,
+            "creator_id":creatorID
+        ]
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            request.httpBody = jsonData
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Create Group error: \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                    if let httpResponse = response as? HTTPURLResponse {
+                        print("Server error Creating Group. Status code: \(httpResponse.statusCode)")
+                    } else {
+                        print("Server error Create Group. No response received.")
+                    }
+                    completion(false)
+                    return
+                }
+                
+                // Handle the response data if needed
+                // ...
+                
+                completion(true)
+            }
+            .resume()
+        } catch {
+            print("Error encoding JSON: \(error.localizedDescription)")
+            completion(false)
+        }
+    }
     //MARK: SEND IMAGE FOR ANALYSIS
     static func sendImageForAnalysis(image: UIImage, completion: @escaping (Bool, Double) -> Void){
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/analyze_image") else {
