@@ -253,7 +253,6 @@ class DataModel {
     
     //MARK: GET GROUPS FROM USER
     static func getGroupsFromUser(id: Int, completion: @escaping ([Group]) -> Void) {
-        print("DataModel: Starting getGroupsFromUser for ID:", id)
         
         guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/get_groups") else {
             print("DataModel: Invalid URL")
@@ -432,6 +431,60 @@ class DataModel {
             .resume()
         } catch {
             print("Error encoding JSON while update_balances.")
+        }
+    }
+    
+    static func makePayment(userID: Int, groupID: Int, amount: Double, description: String? = nil, completion: @escaping (Bool) -> Void) {
+        guard let url = URL(string: "https://e48f-129-115-2-245.ngrok-free.app/api/make_payment") else {
+            print("URL not found: https://e48f-129-115-2-245.ngrok-free.app/api/make_payment")
+            completion(false)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        var parameters: [String: Any] = [
+            "user_id": userID,
+            "group_id": groupID,
+            "amt": amount
+        ]
+        
+        if let desc = description {
+            parameters["description"] = desc
+        }
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            request.httpBody = jsonData
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Payment request error: \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                    if let httpResponse = response as? HTTPURLResponse {
+                        print("Server error making payment. Status code: \(httpResponse.statusCode)")
+                    } else {
+                        print("Server error making payment. No response received.")
+                    }
+                    completion(false)
+                    return
+                }
+                
+                // Handle the response data if needed
+                // ...
+                
+                completion(true)
+            }
+            .resume()
+        } catch {
+            print("Error encoding JSON: \(error.localizedDescription)")
+            completion(false)
         }
     }
     

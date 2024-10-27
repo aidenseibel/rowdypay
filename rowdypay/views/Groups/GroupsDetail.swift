@@ -10,7 +10,6 @@ import SwiftUI
 struct GroupsDetail: View {
     @EnvironmentObject var viewModel: ViewModel
     let thisgroup: Group
-    var amount = 10
     @State private var users: [User] = []
     @State private var isLoading: Bool = true
     @State private var errorMessage: String? // Optional error message
@@ -89,9 +88,10 @@ struct GroupsDetail: View {
                                 y: 5
                             )
                     )
+            let amount = 20.0
                 if amount > 0 {
                     NavigationLink {
-                        CreatePayment()
+                        MakePayment(mygroup: thisgroup, amount: amount)
                     } label: {
                         HStack {
                             Text("Make Payment")
@@ -126,17 +126,29 @@ struct GroupsDetail: View {
     }
     
     private func fetchUsers() {
-        let groupID = thisgroup.id
-        print("Group \(thisgroup.name) has \(thisgroup.users.count) users")
         
-        // Use the users array that's already in the group
-        self.users = []
-        self.isLoading = false
-        
+        let listofuserIDs = thisgroup.users
+        let dispatchGroup = DispatchGroup()
+
+        var fetchedUsers = [User]()
+
+        for userID in listofuserIDs {
+            dispatchGroup.enter()
+            DataModel.getUser(id: userID) { user in
+                fetchedUsers.append(user)
+                dispatchGroup.leave()
+            }
         }
+
+        dispatchGroup.notify(queue: .main) {
+            self.users = fetchedUsers
+            self.isLoading = false
+        }
+    }
+}
 //    private func fetchBalance(){
 //        let groupID = thisgroup.id
 //        let userID = viewModel.localUser.id
 //    }
-}
+
 

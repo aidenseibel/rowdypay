@@ -53,8 +53,7 @@ struct GroupsTab: View {
                 self.groups = fetchedGroups
             }
         }
-        print(userID)
-        print(groups)
+
     
     }
 }

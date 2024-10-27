@@ -20,7 +20,7 @@ class User: Identifiable, Hashable, Codable {
     var username: String
     var email: String
     var image: String
-    var groups: [Group]
+    var groups: [Int]
     var payments: [Int]
     var dateJoined: Date
     
@@ -60,7 +60,7 @@ class User: Identifiable, Hashable, Codable {
         self.username = try container.decode(String.self, forKey: .username)
         self.email = try container.decode(String.self, forKey: .email)
         self.image = try container.decode(String.self, forKey: .image)
-        self.groups = try container.decode([Group].self, forKey: .groups)
+        self.groups = try container.decode([Int].self, forKey: .groups)
         self.payments = try container.decode([Int].self, forKey: .payments)
 
         

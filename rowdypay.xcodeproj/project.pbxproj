@@ -26,7 +26,7 @@
 		17DA9C552CCDBA0000F54F8B /* ScanReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DA9C542CCDBA0000F54F8B /* ScanReceiptView.swift */; };
 		17DA9C592CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DA9C582CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift */; };
 		17DA9C5C2CCDD7C400F54F8B /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 17DA9C5B2CCDD7C400F54F8B /* Shimmer */; };
-		AD8682882CCDB3FC00336FD9 /* CreatePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8682872CCDB3FC00336FD9 /* CreatePayment.swift */; };
+		AD86828A2CCDE62400336FD9 /* MakePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8682892CCDE62400336FD9 /* MakePayment.swift */; };
 		ADCA4D582CCD8987008D4CEA /* GroupsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +51,7 @@
 		17DA9C522CCDAB1200F54F8B /* SelectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGroupView.swift; sourceTree = "<group>"; };
 		17DA9C542CCDBA0000F54F8B /* ScanReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReceiptView.swift; sourceTree = "<group>"; };
 		17DA9C582CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAddFromReceiptView.swift; sourceTree = "<group>"; };
-		AD8682872CCDB3FC00336FD9 /* CreatePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePayment.swift; sourceTree = "<group>"; };
+		AD8682892CCDE62400336FD9 /* MakePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePayment.swift; sourceTree = "<group>"; };
 		ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,7 +153,7 @@
 			children = (
 				17CD07372CCD5FED00EE3B66 /* GroupsTab.swift */,
 				ADCA4D572CCD8987008D4CEA /* GroupsDetail.swift */,
-				AD8682872CCDB3FC00336FD9 /* CreatePayment.swift */,
+				AD8682892CCDE62400336FD9 /* MakePayment.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -248,10 +248,10 @@
 				17CD073E2CCD628800EE3B66 /* Group.swift in Sources */,
 				17CD073A2CCD600200EE3B66 /* ViewModel.swift in Sources */,
 				17CD07382CCD5FED00EE3B66 /* GroupsTab.swift in Sources */,
-				AD8682882CCDB3FC00336FD9 /* CreatePayment.swift in Sources */,
 				17CD074A2CCD6DF300EE3B66 /* GroupSubView.swift in Sources */,
 				17DA9C502CCDA4E100F54F8B /* AddManuallyView.swift in Sources */,
 				17CD073C2CCD628200EE3B66 /* User.swift in Sources */,
+				AD86828A2CCDE62400336FD9 /* MakePayment.swift in Sources */,
 				17DA9C592CCDC8FC00F54F8B /* ConfirmAddFromReceiptView.swift in Sources */,
 				17CD07232CCD5F9100EE3B66 /* rowdypayApp.swift in Sources */,
 				17CD074E2CCD7C3B00EE3B66 /* Util.swift in Sources */,
@@ -394,7 +394,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"rowdypay/Preview Content\"";
-				DEVELOPMENT_TEAM = C72D493DTH;
+				DEVELOPMENT_TEAM = FZ5A2D4WW8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rowdypay/Info.plist;
@@ -424,7 +424,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"rowdypay/Preview Content\"";
-				DEVELOPMENT_TEAM = C72D493DTH;
+				DEVELOPMENT_TEAM = FZ5A2D4WW8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rowdypay/Info.plist;
