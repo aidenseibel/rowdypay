@@ -17,42 +17,45 @@ struct MakePayment: View {
     @State private var paymentSuccess: Bool = false
 
     var body: some View {
-        VStack(spacing: 16) {
-            Text("You owe: $\(amount, specifier: "%.2f")")
-                .font(.title)
-                .fontWeight(.bold)
+        ZStack{
 
-            TextField("Payment Description (optional)", text: $description)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(.systemGray6))
-                )
-                .padding(.horizontal)
-
-            Button(action: {
-                makePayment()
-            }) {
-                Text("Make Payment")
-                    .font(.title3)
+            VStack(spacing: 16) {
+                Text("You owe: $\(amount, specifier: "%.2f")")
+                    .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
+                
+                TextField("Payment Description (optional)", text: $description)
                     .padding()
-                    .frame(maxWidth: .infinity)
                     .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(.accent)
-                            .shadow(
-                                color: Color.accent.opacity(0.3),
-                                radius: 8,
-                                x: 0,
-                                y: 4
-                            )
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color(.systemGray6))
                     )
+                    .padding(.horizontal)
+                
+                Button(action: {
+                    makePayment()
+                }) {
+                    Text("Make Payment")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.accent)
+                                .shadow(
+                                    color: Color.accent.opacity(0.3),
+                                    radius: 8,
+                                    x: 0,
+                                    y: 4
+                                )
+                        )
+                }
+                .padding(.horizontal)
+                
+                Spacer()
             }
-            .padding(.horizontal)
-
-            Spacer()
         }
         
         .padding()

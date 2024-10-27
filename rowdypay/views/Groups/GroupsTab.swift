@@ -60,6 +60,7 @@ struct GroupsTab: View {
                             HStack {
                                 Text(sortOption == .none ? "Default" :
                                         sortOption == .amountHighToLow ? "Highest Amount" : "Lowest Amount")
+                                .fontWeight(.semibold)
                                 Image(systemName: "chevron.down")
                             }
                             .foregroundColor(.primary)
