@@ -31,7 +31,7 @@ struct ReliabilityReportView: View {
 
                 Text("From what we can tell, you make regular payments to your groups on a punctual basis. ")
                     .multilineTextAlignment(.center)
-                    .frame(width: screenWidth * 0.60)
+                    .frame(width: screenWidth * 0.70)
                 
                 Text("Good job!")
             }

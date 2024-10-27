@@ -10,6 +10,8 @@ import Shimmer
 
 struct ProfileTab: View {
     @EnvironmentObject var viewModel: ViewModel
+    @ObservedObject var reloadViewHelper = ReloadViewHelper()
+
     @State private var payments: [Payment] = []
     @State private var isLoading: Bool = true
     @State private var errorMessage: String? // Optional error message
@@ -136,6 +138,7 @@ struct ProfileTab: View {
                     }
                 }
                 .padding(10)
+                .padding(.bottom, 50)
                 .onAppear {
                     fetchPayments()
                 }
@@ -157,7 +160,7 @@ struct ProfileTab: View {
             }, content: {
                 ChangeAvatarView()
                     .onDisappear{
-                        
+                        reloadViewHelper.reloadView()
                     }
             })
         }

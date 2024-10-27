@@ -44,3 +44,10 @@ func formatDateToCustomString(date: Date) -> String {
     
     return finalFormattedDate
 }
+
+// refreshes the view for whatever reason
+class ReloadViewHelper: ObservableObject {
+    func reloadView() {
+        objectWillChange.send()
+    }
+}
