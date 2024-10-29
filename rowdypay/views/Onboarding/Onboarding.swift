@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct Onboarding: View {
     @EnvironmentObject var viewModel: ViewModel
@@ -27,8 +28,7 @@ struct Onboarding: View {
     
     var body: some View {
         ZStack {
-            CirclesView() // Add this first in the ZStack
-                .padding(.vertical, 50)
+            CirclesView()
                 .ignoresSafeArea()
             ScrollView(showsIndicators: false){
                 VStack(alignment: .leading, spacing: 30){
@@ -37,10 +37,23 @@ struct Onboarding: View {
                         .frame(width: screenWidth * 0.3, height: screenWidth * 0.3)
                         .padding(.top, 20)
                         .cornerRadius(10)
+                        .shimmering(
+                            active: true,
+                            duration: 3,
+                            bounce: true,
+                            delay: 0.5
+                        )
                     
                     Text("Welcome to RowdyPay")
                         .font(.system(size: 42))
                         .bold()
+                        .shimmering(
+                            active: true,
+                            duration: 3,
+                            bounce: true,
+                            delay: 0.5
+                        )
+                    
                                         
                     Picker("driving", selection: $onboardingMode) {
                         ForEach(onboardingOptions, id: \.self){option in
@@ -74,9 +87,21 @@ struct Onboarding: View {
                                 }
                             } label: {
                                 Text("Submit")
-                                    .font(.system(size: 18))
+                                    .font(.system(size: 24))
+                                    .fontWeight(.bold)
+                                    .opacity(0.8)
+                                    .brightness(0.3)
+                                    .foregroundStyle(
+                                        LinearGradient(
+                                            colors: [.accent, .yellow.opacity(0.7)],  // Choose your colors
+                                            startPoint: .leading,
+                                            endPoint: .trailing
+                                        )
+                                    )
+
                             }
                             .padding(.top, 20)
+                            .padding(.horizontal, 10)
                             
                         }
                     }
@@ -122,9 +147,21 @@ struct Onboarding: View {
                                 }
                             } label: {
                                 Text("Submit")
-                                    .font(.system(size: 18))
+                                    .font(.system(size: 24))
+                                    .fontWeight(.bold)
+                                    .opacity(0.8)
+                                    .brightness(0.3)
+                                    .foregroundStyle(
+                                        LinearGradient(
+                                            colors: [.accent, .yellow.opacity(0.7)],  // Choose your colors
+                                            startPoint: .leading,
+                                            endPoint: .trailing
+                                        )
+                                    )
+
                             }
                             .padding(.top, 20)
+                            .padding(.horizontal, 10)
                         }
                     }
                     
